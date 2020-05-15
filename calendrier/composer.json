@@ -1,0 +1,17 @@
+{
+    "name": "charlie/tuto-calendar",
+    "authors":[
+        {
+            "name": "Charlie",
+            "email": "bolot.charlie@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Calendar\\": "src/Calendar",
+            "App\\": "src/App"
+        }
+    },
+    "require": {}
+
+}
