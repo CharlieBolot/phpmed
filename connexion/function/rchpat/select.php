@@ -1,35 +1,53 @@
 <?php
 require_once 'connexion/bdd/bdd.php';
 
-    $message='';
+// print_r($_POST);
+// echo('<br>');
+
+    $message=[];
     
    
         $query=$pdo->prepare('SELECT * FROM patient WHERE nom = :nom OR prenom = :prenom');
-        $query->bindValue(':nom',$_POST['nom'], PDO::PARAM_STR);
-        $query->bindValue(':prenom',$_POST['prenom'], PDO::PARAM_STR);
+        $query->bindParam(':nom',$_POST['nom'], PDO::PARAM_STR);
+        $query->bindParam(':prenom',$_POST['nom'], PDO::PARAM_STR);
         $query->execute();
-        $data=$query->fetch();
+        $data=$query->fetchAll();
+        // echo'<pre>';
+        // print_r($data);
+        // echo'</pre>';
 
-        if($data['id']>0){
-            $mail = $data['mail'];
-	        $nom = $data['nom'];
-            $prenom = $data['prenom'];
-            $adresse = $data['adresse'];
-            $ville = $data['ville'];
-            $cp = $data['cp'];
-            $numtel = $data['numtel'];
-           
-            $message=$prenom.' '.$nom.' Résidant '.$adresse.' '.$ville.' '.$cp.' Tel : '.$numtel.' @Mail : '.'<a href="mailto'.$mail.'">'.$mail.'</a>';
-           // header('Location:  /phpMed/connexion/praticien/profil');
+        $datacount = count($data);
+    
         
-        }
-        else{
-            //header('Location: /phpMed/connexion/praticien/wrong');
-            $message='pas de résultat trouvé';
-        }
 
-        return $message;
+            if($datacount>0){
+                
+                for($i = 0; $i < $datacount; $i++){    
+                    $mail = $data[$i]['mail'];                    
+	                $nom = $data[$i]['nom'];
+                    $prenom = $data[$i]['prenom'];
+                    $adresse = $data[$i]['adresse'];
+                    $ville = $data[$i]['ville'];
+                    $cp = $data[$i]['cp'];
+                    $numtel = $data[$i]['numtel'];
+                    
+                    $message[$i] = $prenom.' '.$nom.' résidant '.$adresse.' '.$ville.' '.$cp.' Tel : '.$numtel.' @Mail : '.'<a href="mailto'.$mail.'">'.$mail.'</a>';
+                    
+                }
+                //header('Location:  /phpMed/connexion/praticien/profil'); 
+            
+            
+            }
+            else{
+                //header('Location: /phpMed/connexion/praticien/wrong');
+                $message='pas de résultat trouvé';
+            }
+        
+
+        $_SESSION['message']=$message;
+        
+        header('Location:  /phpMed/connexion/praticien/profil');
  
-
+    
 ?>
 

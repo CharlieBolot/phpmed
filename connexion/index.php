@@ -9,8 +9,8 @@ require_once 'inc/header.php';
     <p>Vous êtes :</p>
     <ul>
         <li><a href='/phpmed/connexion/patient' >Patient</a></li>
-        <li><a href='praticien' >Praticien</a></li>
-        <li><a href='admin' >Admin</a></li>
+        <li><a href='/phpmed/connexion/praticien' >Praticien</a></li>
+        <li><a href='/phpmed/connexion/admin' >Admin</a></li>
     </ul>
 </div>
   

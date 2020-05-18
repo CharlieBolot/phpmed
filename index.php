@@ -77,6 +77,12 @@
         if(empty($page[5])){
           require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'rchpat'.DIRECTORY_SEPARATOR.'select.php';
         }
+        elseif($page[5] === 'rch'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'rchpat'.DIRECTORY_SEPARATOR.'select.php';
+        }
+        elseif($page[5] === 'rchspc'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'rchpat'.DIRECTORY_SEPARATOR.'selectspc.php';
+        }
         elseif($page[5] === 'fiche'){
           if(empty($page[6])){
             require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'fichepatient.php';
