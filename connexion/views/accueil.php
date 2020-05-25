@@ -1,9 +1,7 @@
 <?php
 require_once 'inc/header.php';
 ?>
-    <nav class="navbar navbar-dark bg-primary mb-3">
-    <p class="navbar-brand">Connexion</p>
-    </nav>
+    
 
 <div class="col-sm-8">
     <p>Vous êtes :</p>

@@ -8,7 +8,7 @@
 
   if($page[2] === 'connexion'){
     if(empty($page[3])){
-      require_once 'connexion'.DIRECTORY_SEPARATOR.'index.php';
+      require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'acceuil.php';
     }
     elseif($page[3] === 'patient'){
       if(empty($page[4])){
@@ -45,7 +45,18 @@
         }
       }
       elseif($page[4] === 'calendrier'){
-        require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'patient'.DIRECTORY_SEPARATOR.'calendrier.php';
+        if(empty($page[5])){
+        require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'calend.php';
+        }
+        elseif(($page[5]) === 'add'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'add.php';
+        }
+        elseif(($page[5]) === 'edit'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'edit.php';
+        }
+        elseif(($page[5]) === 'success'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'calend.php';
+        }
       }
       else if($page[4] === 'wrong'){
         require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'patient'.DIRECTORY_SEPARATOR.'patientcon.php';
@@ -68,7 +79,7 @@
         require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'pratcon.php';
       }
       elseif($page[4] === 'calendrier'){
-        require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'calendrier.php';
+        require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'calend.php';
       }
       elseif($page[4] === 'mail'){
         require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'mail.php';
@@ -85,7 +96,7 @@
         }
         elseif($page[5] === 'fiche'){
           if(empty($page[6])){
-            require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'fichepatient.php';
+            require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'profil.php';
           }
           elseif($page[6] === 'ordonnance'){
             require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'ordo.php';
@@ -143,7 +154,7 @@
   }
   
   elseif(empty($page[2])){
-    require_once 'connexion'.DIRECTORY_SEPARATOR.'index.php';
+    require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'accueil.php';
   }
 require_once 'inc'.DIRECTORY_SEPARATOR.'footer.php';
 ?>

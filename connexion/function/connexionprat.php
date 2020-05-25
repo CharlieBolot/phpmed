@@ -1,5 +1,6 @@
 <?php
 require_once 'connexion/bdd/bdd.php';
+$pdo = get_pdo();
 
     $message='';
     
@@ -15,7 +16,7 @@ require_once 'connexion/bdd/bdd.php';
             $_SESSION['id'] = $data['id'];
             $_SESSION['nom'] = $data['nom'];
 	        $_SESSION['prenom'] = $data['prenom'];
-            
+            $_SESSION['type']='praticien';
             header('Location:  /phpMed/connexion/praticien/profil');
         
         }

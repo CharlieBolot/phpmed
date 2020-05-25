@@ -1,5 +1,6 @@
 <?php
 require_once 'connexion/bdd/bdd.php';
+$pdo= get_pdo();
 
 //print_r($_POST);
 $rech = explode(' ',$_POST['nom']);

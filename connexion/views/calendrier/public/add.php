@@ -1,7 +1,11 @@
 <?php
-require '../src/bootstrap.php';
+require_once 'connexion/bdd/bdd.php';
+require_once 'connexion\src\Calendar\EventValidator.php';
+require_once 'connexion\src\Calendar\Event.php';
+require_once 'connexion\src\Calendar\Events.php';
+
 $data = [
-    'date' => $_GET['date'] ?? date('y-m-d'),
+    'date' => $_SESSION['date'] ?? date('y-m-d'),
     'start' => date('H:i'),
     'end' => date('H:i')
 
@@ -20,12 +24,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $events = new \Calendar\Events(get_pdo());
         $event = $events->hydrate(new \Calendar\Event(),$data);
         $events->create($event);
-        header('Location: index?success=1');
+        header('Location: connexion\views\calendrier\public\calend.php?success=1');
         exit ();
     }
 
 }
-render('header.php', ['title' => 'Ajouter un évenement']);
+render('inc/header.php', ['title' => 'Ajouter un évenement']);
 ?>
 
 
@@ -36,6 +40,7 @@ render('header.php', ['title' => 'Ajouter un évenement']);
     <?php if (!empty($errors)): ?>
         <div class="alert alert-danger">
             Merci de corriger vos erreurs
+        </div>
     
     <?php endif; ?>
 
@@ -44,7 +49,7 @@ render('header.php', ['title' => 'Ajouter un évenement']);
 
     <h1> Ajouter un évènement    </h1>
     <form action="" method="post" class="form">
-        <?php render('calendar/form.php',['data' => $data, 'errors' => $errors]); ?>
+        <?php render('connexion/views/calendrier/public/views/calendar/form.php',['data' => $data, 'errors' => $errors]); ?>
     
             <div class="form-group">
                 <button class="btn btn-primary">Ajouter l'évènement</button>
@@ -57,6 +62,6 @@ render('header.php', ['title' => 'Ajouter un évenement']);
 
 
 <?php
-render('footer.php');
+render('inc/footer.php');
 ?>
 

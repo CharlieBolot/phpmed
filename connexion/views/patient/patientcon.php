@@ -1,15 +1,14 @@
 <?php
-require_once 'connexion/inc/header.php';
+require_once 'inc/header.php';
 require_once 'connexion/bdd/bdd.php';
 require_once 'connexion/src/medecin.php';
 require_once 'connexion/src/medecinDAO.php';
+$pdo = get_pdo();
 $medecinDAO = new medecinDAO($pdo);
 $listeMedecin = $medecinDAO->getList();
 ?>
 
-    <nav class="navbar navbar-dark bg-primary mb-3">
-    <h1 class="navbar-brand">Vous êtes :</h1>
-    </nav>
+    
 
     <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
 
@@ -74,7 +73,7 @@ $listeMedecin = $medecinDAO->getList();
     </div>
 
     <div class="col-sm-6">
-        <form method="post" class="form" action="../connexion/patient/profil/newpat">
+        <form method="post" class="form" action="/phpMed/connexion/patient/profil/newpat">
             
                 <div class="col-sm-12">
                     <div class="form-group">
@@ -131,6 +130,6 @@ $listeMedecin = $medecinDAO->getList();
 
 
 <?php
-require_once 'connexion/inc/footer.php';
+require_once 'inc/footer.php';
 ?>
 

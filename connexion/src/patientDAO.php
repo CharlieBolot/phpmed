@@ -32,8 +32,6 @@ class patientDAO{
         return $listePatient;
     }
 
-
-
     /**
      * retourne les info d'un patient depuis son id
      * @param $id

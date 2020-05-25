@@ -1,12 +1,12 @@
 <?php
-require_once '../src/bootstrap.php';
+require_once 'connexion/bdd/bdd.php';
 $pdo= get_pdo();
 $events = new Calendar\Events($pdo);
 $errors = [];
 
 
 try {
-    $event = $events->find($_GET['id'] ?? null);
+    $event = $events->find($_SESSION['id'] ?? null);
 } catch (\Exception $e) {
     e404();
 }catch (\Error $e) {
@@ -22,17 +22,18 @@ $data = [
 ];
 
 
-
+// TODO : changer le lien dans le header - success
 
     $validator = new Calendar\EventValidator();
    
     if(empty($errors)){
         $events->hydrate($event, $data);
         $events->delete($event);
-        header('Location: index?success=1');
+        header('Location: connexion\views\calendrier\public\Calend.php?success=1');
+        
         exit ();
     }
 
-print_r($errors);
+//print_r($errors);
 
 

@@ -25,10 +25,6 @@ class medecinDAO{
              $listeMedecin[]=new Medecin($value);
              
         }
-        // while ($donnees = $listeprat->fetch(PDO::FETCH_ASSOC)) {
-        //     $listeMedecin[] = new Medecin($donnees); 
-        // }
-
         return $listeMedecin;
     }
 

@@ -7,13 +7,6 @@ use DateTime;
 class Week{
 
     public $days = ['lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
-    
-    
-    
-    
-   
-
-
     public $month;
     public $year;
     public $week;
@@ -42,10 +35,7 @@ class Week{
 
         $this->month = $month;
         $this->week = $week;
-        $this->year = $year;
-        
-    
-        
+        $this->year = $year;   
         
     }
 
@@ -74,15 +64,6 @@ public function getStartingDay() : \DateTime{
 
     }
 
-   
-        
-       
-
-
-
-
-
-
 
     /**
      * 
@@ -97,31 +78,17 @@ public function getStartingDay() : \DateTime{
             $pyear=$year-1;
             $firstweek = New DateTime("{$pyear}-01-01");
             if($firstweek->format('w')!=1) $firstweek->modify("next monday");
-           // print_r($firstweek);=>debug
-           // echo('<br>');=>debug
             $lastweek = $firstweek->modify('+52 Weeks');
-           // print_r($lastweek);=>debug
-            $test = intval($lastweek->format('Y'));
-           // echo($test.'<br>');=>debug
-            //echo($year);=>debug
-            
+            $test = intval($lastweek->format('Y'));            
                 if($year == $test){
                     $week = 52;
                 }else{
                     $week = 53;
                 }
-
             $year -=1;
-
         }
-                
-        
         return new Week($week, $year);
-
     }
-
-
-
     
      /**
      * 
@@ -132,15 +99,12 @@ public function getStartingDay() : \DateTime{
     public function nextWeek() {
         $week = $this->week + 1; 
         $year = $this->year;
-        if($week==53){
-            
-            
+        if($week==53){   
             $firstweek = New DateTime("{$year}-01-01");
             if($firstweek->format('w')!=1) $firstweek->modify("next monday");
             $lastweek = $firstweek->modify('+52 weeks');     
             $test = intval($lastweek->format('Y'));
-            
-            
+                  
                 if($year != $test){ 
                     $week = 1;
                     $year +=1;
@@ -168,10 +132,7 @@ public function getStartingDay() : \DateTime{
          
         return $begin->modify("+".($this->week-1)." weeks");
     }
-
-
-
-    
+ 
     /**
      * 
      * Renvoi le mois suivant
@@ -221,9 +182,7 @@ public function getStartingDay() : \DateTime{
 
         }while ($moisdebut !=  $moisfin);
 
-        //si le mois d'arrivé est janvier c'est qu'on a changé d'année
-
-        
+        //si le mois d'arrivé est janvier c'est qu'on a changé d'année        
         $week-=1;
 
         return new Week($week, $year);
@@ -278,23 +237,16 @@ public function getStartingDay() : \DateTime{
     
                 $year -=1;
     
-            }
-            
+            }           
         }while ($moisdebut !=  $moisfin);
 
         //si le mois d'arrivé est janvier c'est qu'on a changé d'année
         
         $week+=2;
 
-        return new Week($week, $year);
-
-        
+        return new Week($week, $year);       
 
     }
-   
-
-
-
 
 }
 

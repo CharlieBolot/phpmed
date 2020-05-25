@@ -62,13 +62,4 @@ class Medecin{
         $this->mail = $mail;
     }
 
-
-
-    
-        
-    
-
-
-
-
 }

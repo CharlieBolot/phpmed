@@ -1,8 +1,11 @@
 <?php
-require_once '../src/bootstrap.php';
+require_once 'connexion/bdd/bdd.php';
+require_once 'connexion\src\Calendar\Events.php';
+require_once 'connexion\src\Calendar\EventValidator.php';
 $pdo= get_pdo();
 $events = new Calendar\Events($pdo);
 $errors = [];
+$type = $_SESSION['type'];
 
 
 try {
@@ -31,7 +34,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(empty($errors)){
         $events->hydrate($event, $data);
         $events->update($event);
-        header('Location: index?success=1');
+        
+        header('Location: /phpmed/connexion/'.$type.'/calendrier/success');
         exit ();
     }
 
@@ -39,14 +43,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 }
 
 
-render('header.php',['title'=> $event->getName()]);
+render('inc/header.php',['title'=> $event->getName()]);
 ?>
 
 <div class="container">
     <h1>Changer mon rendez-vous <small><?= h($event->getName()); ?> </small></h1>
 
     <form action="" method="post" class="form">
-        <?php render('calendar/formedit.php',['data' => $data, 'errors' => $errors]); ?>
+        <?php render('connexion\views\calendrier\public\views\calendar\formedit.php',['data' => $data, 'errors' => $errors]); ?>
              <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
     
                  <div class="form-group">
@@ -59,7 +63,7 @@ render('header.php',['title'=> $event->getName()]);
     </form>
 
     <form action="delete.php?id=<?= $event->getId();?>" method="post" class="form">
-        <?php render('calendar/formedit.php',['data' => $data, 'errors' => $errors]); ?>
+        <?php render('connexion\views\calendrier\public\views\calendar\formedit.php',['data' => $data, 'errors' => $errors]); ?>
              
     
                  <div class="form-group">
@@ -73,4 +77,4 @@ render('header.php',['title'=> $event->getName()]);
 
 </div>
 
-<?php render('footer.php');?>
+<?php render('inc/footer.php');?>

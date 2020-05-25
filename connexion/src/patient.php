@@ -82,13 +82,4 @@ class Patient{
         $this->mail = $mail;
     }
 
-
-
-    
-        
-    
-
-
-
-
 }

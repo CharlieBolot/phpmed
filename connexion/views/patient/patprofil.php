@@ -1,17 +1,16 @@
 <?php
-require_once 'connexion/inc/header.php';
+require_once 'inc/header.php';
 require_once 'connexion/bdd/bdd.php';
 require_once 'connexion/src/medecin.php';
 require_once 'connexion/src/medecinDAO.php';
 //require 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'connexion.php';
+$pdo= get_pdo();
 $medecinDAO = new medecinDAO($pdo);
 $id = $_SESSION['idprat'];
 $medecin = $medecinDAO->getmedecin($id);
 ?>
 
-    <nav class="navbar navbar-dark bg-primary mb-3">
-    <h1 class="navbar-brand"> Profil </h1> 
-    </nav>
+    
 <div class="row ">  
     
 
@@ -69,6 +68,6 @@ $medecin = $medecinDAO->getmedecin($id);
 
 
 <?php
-require_once 'connexion/inc/footer.php';
+require_once 'inc/footer.php';
 ?>
 

@@ -1,15 +1,15 @@
 <?php
-require_once '../src/bootstrap.php';
+require_once 'connexion/bdd/bdd.php';
 
 
 $pdo= get_pdo();
 $events = new Calendar\Events($pdo);
-if( !isset($_GET['id'])){
-    header('location: 404.php');
+if( !isset($_SESSION['id'])){
+    header('location: connexion\views\404.php');
 }
 
 try {
-    $event = $events->find($_GET['id']);
+    $event = $events->find($_SESSION['id']);
 } catch (\Exception $e) {
     e404();
 }
@@ -17,7 +17,7 @@ try {
 
 
 
-render('header.php',['title'=> $event->getName()]);
+render('inc/header.php',['title'=> $event->getName()]);
 ?>
 
 <h1><?= h($event->getName()); ?></h1>
@@ -36,4 +36,4 @@ render('header.php',['title'=> $event->getName()]);
     
 </ul>
 
-<?php require 'views/footer.php';?>
+<?php require 'inc/footer.php';?>

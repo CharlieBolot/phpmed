@@ -64,24 +64,9 @@ class Validator{
         return true;
  
     }
- 
-
-    /*  public function beforTime(string $startField, string $endField){
-         if($this->time($startField) && $this->time($endField)){
-             $start =  \DateTime::createFromFormat('H:i',$this->data[$startField]);
-             $end =  \DateTime::createFromFormat('H:i',$this->data[$endField]);
-             if($start->getTimestamp() > $end->getTimestamp()){
-                 $this->errors[$startField] = "L'heure de début doit se situer avant l'heure de fin";
-                 return false;
-             }
-             return true;
-        }
-
-        return false;
-    } */
 
     public function dispo(string $startField,string $field):bool{
-        require_once '../src/bootstrap.php';    
+        //require_once '../src/bootstrap.php';    
          
         $start =  \DateTime::createFromFormat('H:i',$this->data[$startField]);
         $datestart = \DateTime::createFromFormat('Y-m-d',$this->data[$field]);
@@ -91,10 +76,6 @@ class Validator{
         $datestart = $datestart->format('Y-m-d');
         
         $dateinit = $datestart.' '.$start;
-        
-        // $dateinit = Date($dateinit);
-        // $dateinit = New DateTime($dateinit);
-        // $dateinit = $dateinit->format('Y-m-d H:i:s');
         $teststart=explode(':',$start,1);
         $testDayStart = New DateTime($this->data[$field]);
         $testDayStart = $testDayStart->format('w');
@@ -111,19 +92,13 @@ class Validator{
             $duree = 20;
             for($h=0;$h<$duree; $h++){
                     $verif = $pdo->prepare('SELECT * FROM events WHERE start ="'.$dateinit.'"');
-       
-                    //$verif->bindValue('start',$start,\PDO::PARAM_STR);
                     $verif->execute();
-        
-                    $data=$verif->fetch();
-                    //print_r($data['start']);
-     
+                    $data=$verif->fetch();    
                     if(isset($data['start'])){
                         $this->errors[$startField] = "L'horaire est déjà pris";
                         return false;
                     }
                 $time = new DateTime($dateinit);
-                //$time->sub(new \DateInterval('PT' . $h . 'M'));
                 $time->modify('-1 Minutes');
                 $dateinit = $time->format('Y-m-d H:i');
         

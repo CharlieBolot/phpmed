@@ -1,14 +1,13 @@
 <?php
-require_once 'connexion/inc/header.php';
+require_once 'inc/header.php';
 require_once 'connexion/bdd/bdd.php';
 require_once 'connexion/src/medecin.php';
 require_once 'connexion/src/medecinDAO.php';
+$pdo= get_pdo();
 $medecinDAO = new medecinDAO($pdo);
 $listeMedecin = $medecinDAO->getList();
 ?>
-    <nav class="navbar navbar-dark bg-primary mb-3">
-    <p class="navbar-brand">Connexion</p>
-    </nav>
+    
 
     <?php $indicesServer = $_SERVER['REQUEST_URI'] ;
         $test = explode('/', $indicesServer);
@@ -60,6 +59,6 @@ $listeMedecin = $medecinDAO->getList();
 
 
 <?php
-require_once 'connexion/inc/footer.php';
+require_once 'inc/footer.php';
 ?>
 

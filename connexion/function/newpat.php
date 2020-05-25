@@ -1,6 +1,8 @@
 <?php
 require_once 'connexion/bdd/bdd.php';
 
+$pdo= get_pdo();
+
 if(!empty($_POST)){
 
     $nom = $_POST['nom'];
@@ -22,8 +24,8 @@ if(!empty($_POST)){
     $req->execute( );
     $data = $req->fetch();
 
-   
-    header('Location: ../success');
+    header('Location: /phpMed/connexion/patient/success');
+    
     exit();
 
     

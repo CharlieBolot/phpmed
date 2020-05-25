@@ -2,7 +2,6 @@
 
 namespace Calendar;
 
-
 class Events{
 
 
@@ -131,10 +130,6 @@ class Events{
 
     }
 
-
-
-
-
     /**
      * supprime un évènement
      * @param Event $event
@@ -142,26 +137,12 @@ class Events{
      */
 
 
-
     public function delete(Event $event): bool{
         $statement = $this->pdo->prepare('DELETE FROM events WHERE id = :id ');
-        return $statement->execute(['id'=>$_GET['id']]);
+        return $statement->execute(['id'=>$_SESSION['id']]);
      
 
         
     }
-
-
-   
-
-
-
-
-
-
-
-
-
-
 
 }
