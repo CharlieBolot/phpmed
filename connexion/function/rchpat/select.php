@@ -31,7 +31,7 @@ require_once 'connexion/bdd/bdd.php';
                     $cp = $data[$i]['cp'];
                     $numtel = $data[$i]['numtel'];
                     
-                    $message[$i] = $prenom.' '.$nom.' résidant '.$adresse.' '.$ville.' '.$cp.' Tel : '.$numtel.' @Mail : '.'<a href="mailto'.$mail.'">'.$mail.'</a>';
+                    $message[$i] = $prenom.' '.$nom.' résidant '.$adresse.' '.$ville.' '.$cp.' Tel : '.$numtel.' @Mail : '.'<a href="mailto:?to='.$mail.'">'.$mail.'</a>';
                     
                 }
                 //header('Location:  /phpMed/connexion/praticien/profil'); 
@@ -40,7 +40,7 @@ require_once 'connexion/bdd/bdd.php';
             }
             else{
                 //header('Location: /phpMed/connexion/praticien/wrong');
-                $message='pas de résultat trouvé';
+                $message[0]='pas de résultat trouvé';
             }
         
 

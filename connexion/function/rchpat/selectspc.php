@@ -1,13 +1,13 @@
 <?php
 require_once 'connexion/bdd/bdd.php';
 
-print_r($_POST);
+//print_r($_POST);
 $rech = explode(' ',$_POST['nom']);
 $nom = $rech[0];
 $prenom = $rech[1];
 
 
-    $message='';
+    $message=[];
     
    
         $query=$pdo->prepare('SELECT * FROM patient WHERE nom = :nom AND prenom = :prenom');
@@ -27,14 +27,14 @@ $prenom = $rech[1];
             $numtel = $data['numtel'];
            
            
-            $message=$prenom.' '.$nom.' résidant '.$adresse.' '.$ville.' '.$cp.' Tel : '.$numtel.' @Mail : '.'<a href="mailto'.$mail.'">'.$mail.'</a>';
+            $message[0]=$prenom.' '.$nom.' résidant '.$adresse.' '.$ville.' '.$cp.' Tel : '.$numtel.' @Mail : '.'<a href="mailto:?to='.$mail.'">'.$mail.'</a>';
             //header('Location:  /phpMed/connexion/praticien/profil');
            
         
         }
         else{
             //header('Location: /phpMed/connexion/praticien/wrong');
-            $message='pas de résultat trouvé';
+            $message[0]='pas de résultat trouvé';
         }
 
         $_SESSION['message']=$message;

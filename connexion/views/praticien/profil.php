@@ -3,7 +3,6 @@ require_once 'connexion/inc/header.php';
 require_once 'connexion/bdd/bdd.php';
 require_once 'connexion/src/patient.php';
 require_once 'connexion/src/patientDAO.php';
-//require 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'connexion.php';
 $patientDAO = new patientDAO($pdo);
 $listePatient = $patientDAO->getlist();
 ?>
@@ -32,7 +31,7 @@ $listePatient = $patientDAO->getlist();
 
             </div>
 
-            <div class="col-sm-12">
+            <div class="col-sm-12" >
                 <h4>Liste des patients</h4>
                 <form action='/phpMed/connexion/praticien/recherchepatient/rch' label='recherchepatient' method='post'>
                     <input id="recherche" type="text" required class="form-control" name="nom" placeholder="nom ou prénom">
@@ -59,6 +58,27 @@ $listePatient = $patientDAO->getlist();
 
 
             </div>
+    </div>
+    <div class="col-sm-6">
+            <div class="form-group">
+                        <h2>&nbsp</h2>
+            </div>
+        <div class="col-sm-12" >
+                <h4>Vos Mails :</h4>
+                <div class="container form-control">
+                                <?php echo('pas de mails pour l\'instant');?>
+                </div>
+
+        </div>
+        <br>
+        <div class="col-sm-12" >
+                <h4>Votre prochain rendez-vous :</h4>
+                <div>
+                    <!-- TODO afficher le prochain rdv --->
+                </div>
+
+        </div>
+    </div>
 
 
 
