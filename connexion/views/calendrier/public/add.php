@@ -3,9 +3,9 @@ require_once 'connexion/bdd/bdd.php';
 require_once 'connexion\src\Calendar\EventValidator.php';
 require_once 'connexion\src\Calendar\Event.php';
 require_once 'connexion\src\Calendar\Events.php';
-
+$type = $_SESSION['type'];
 $data = [
-    'date' => $_SESSION['date'] ?? date('y-m-d'),
+    'date' => $_GET['date'] ?? date('y-m-d'),
     'start' => date('H:i'),
     'end' => date('H:i')
 
@@ -24,7 +24,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $events = new \Calendar\Events(get_pdo());
         $event = $events->hydrate(new \Calendar\Event(),$data);
         $events->create($event);
-        header('Location: connexion\views\calendrier\public\calend.php?success=1');
+        header('Location: /phpmed/connexion/'.$type.'/calendrier/success');
         exit ();
     }
 

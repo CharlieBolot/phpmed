@@ -54,6 +54,9 @@
         elseif(($page[5]) === 'edit'){
           require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'edit.php';
         }
+        elseif(($page[5]) === 'delete'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'delete.php';
+        }
         elseif(($page[5]) === 'success'){
           require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'calend.php';
         }

@@ -62,7 +62,7 @@ render('inc/header.php',['title'=> $event->getName()]);
         </div>
     </form>
 
-    <form action="delete.php?id=<?= $event->getId();?>" method="post" class="form">
+    <form action="\phpmed\connexion\patient\calendrier\delete?id=<?= $event->getId();?>" method="post" class="form">
         <?php render('connexion\views\calendrier\public\views\calendar\formedit.php',['data' => $data, 'errors' => $errors]); ?>
              
     

@@ -20,7 +20,7 @@ class Week{
 
     public function __construct(?int  $week = null,?int  $year = null)
     {
-        
+       
         if ($week === null ){
             $week =intval(date('W'));
         }
@@ -28,14 +28,14 @@ class Week{
             $year =intval(date('Y'));
         }
         
-        $date=new DateTime("{$year}-01-01");
-        if ($date->format('w')!=1) $date->modify("next monday");
-        $date->modify("+".($week-1)." weeks");
+        $date=$this->premierdelasemaine();
+        
+        $this->week = $week;
+        $this->year = $year;
         $month=$date->format('m');
 
         $this->month = $month;
-        $this->week = $week;
-        $this->year = $year;   
+        
         
     }
 
@@ -119,7 +119,7 @@ public function getStartingDay() : \DateTime{
 
     /**
      * 
-     * Renvoi le 1er de la semaine voulue
+     * Renvoi le 1er jour de la semaine 
      * @return DateTime
      * 
      */
@@ -127,10 +127,15 @@ public function getStartingDay() : \DateTime{
     public function premierdelasemaine(): DateTime{
         // Obtenir le premier jour de la premiere semaine de l'année en cours
         $begin = new DateTime("{$this->year}-01-01");
+        $week = $this->week;
          
-        if ($begin->format('w')!=1) $begin->modify("next monday");
+        $i=1;
+            if ($begin->format('w')!=1) {
+                $begin->modify("next monday");
+                $i+=1;
+            }
          
-        return $begin->modify("+".($this->week-1)." weeks");
+        return $begin->modify("+".($week-$i)." weeks");
     }
  
     /**
@@ -140,52 +145,12 @@ public function getStartingDay() : \DateTime{
      * 
      */
     public function nextMonth(): Week{
-        $week = $this->week;
-        $year = $this->year;
+        
+        $dateact = $this->premierdelasemaine();
+        $moisSuivant=(clone $dateact)->modify("+ 1 month");
+        return new Week(intval($moisSuivant->format('W')),intval($moisSuivant->format('Y')));
 
-
-        $begin = new DateTime("{$this->year}-01-01");
-         
-        if ($begin->format('w')!=1) $begin->modify("next monday");
-         
-        $dateact = $begin->modify("+".($this->week-1)." weeks");
-
-        $moisfin = $dateact->modify("next month");
-
-        $moisfin = intval($moisfin->format('m'));
-
-        //tant que le mois 'm' ne change pas on ajoute des semaines
-       do{
-            $begin = new DateTime("{$this->year}-01-01");
-            if ($begin->format('w')!=1) $begin->modify("next monday");
-            $dateact = $begin->modify("+".($week-1)." weeks");
-            $moisdebut = intval($dateact->format('m'));
-            $week += 1;
-            if($week==53){
-            
-            
-                $firstweek = New DateTime("{$year}-01-01");
-                if($firstweek->format('w')!=1) $firstweek->modify("next monday");
-                $lastweek = $firstweek->modify('+52 weeks');     
-                $test = intval($lastweek->format('Y'));
-                
-                
-                    if($year != $test){ 
-                        $week = 1;
-                        $year +=1;
-                     };  
-    
-            }elseif($week>53){
-                $week = 1;
-                $year +=1;
-            }
-
-        }while ($moisdebut !=  $moisfin);
-
-        //si le mois d'arrivé est janvier c'est qu'on a changé d'année        
-        $week-=1;
-
-        return new Week($week, $year);
+        
 
     }
 
@@ -193,58 +158,17 @@ public function getStartingDay() : \DateTime{
      * 
      * Renvoi le mois précédent
      * @param Month
-     * 
+     * @return Week
      */
     public function previousMonth(): Week{
-        $week = $this->week;
-        $year = $this->year;
 
 
-        $begin = new DateTime("{$this->year}-01-01");
-         
-        if ($begin->format('w')!=1) $begin->modify("next monday");
-         
-        $dateact = $begin->modify("+".($this->week-1)." weeks");
+       
+            
+            $dateact = $this->premierdelasemaine();
+            $moisPrecedent=(clone $dateact)->modify("- 1 month + 1 weeks");
+            return new Week(intval($moisPrecedent->format('W')),intval($moisPrecedent->format('Y')));
 
-        $moisfin = $dateact->modify("previous month");
-        $moisfin = $moisfin->modify("previous month");
-        if ($moisfin->format('w')!=1) $moisfin->modify("next monday");
-
-        $moisfin = intval($moisfin->format('m'));
-
-        //tant que le mois 'm' ne change pas on retire des semaines
-       do{
-            $begin = new DateTime("{$this->year}-01-01");
-            if ($begin->format('w')!=1) $begin->modify("next monday");
-            $dateact = $begin->modify("+".($week-1)." weeks");
-            $moisdebut = $dateact;
-            if ($moisdebut->format('w')!=1) $begin->modify("next monday");
-            $moisdebut = intval($dateact->format('m'));
-            $week -= 1;
-            if($week==0){
-                $pyear=$year-1;
-                $firstweek = New DateTime("{$pyear}-01-01");
-                if($firstweek->format('w')!=1) $firstweek->modify("next monday");
-                $lastweek = $firstweek->modify('+52 Weeks');
-               
-                $test = intval($lastweek->format('Y'));
-              
-                    if($year == $test){
-                        $week = 52;
-                    }else{
-                        $week = 53;
-                    }
-    
-                $year -=1;
-    
-            }           
-        }while ($moisdebut !=  $moisfin);
-
-        //si le mois d'arrivé est janvier c'est qu'on a changé d'année
-        
-        $week+=2;
-
-        return new Week($week, $year);       
 
     }
 

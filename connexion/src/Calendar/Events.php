@@ -139,7 +139,7 @@ class Events{
 
     public function delete(Event $event): bool{
         $statement = $this->pdo->prepare('DELETE FROM events WHERE id = :id ');
-        return $statement->execute(['id'=>$_SESSION['id']]);
+        return $statement->execute(['id'=>$event->getId()]);
      
 
         

@@ -23,6 +23,7 @@ $week = new Calendar\Week($sem ?? null, $yea ?? null);
 
 // Debut de semaine en cours
 $start= $week->premierdelasemaine();
+
 // Fin de semaine en cours
 $end=(clone $start)->modify("+6 days");
   
@@ -36,14 +37,31 @@ $end=(clone $start)->modify("+6 days");
     <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
         <h1><?= $week->toString($start->format('m')); ?></h1>
 
-        <!-- TODO : ajouter le succes sur l'index general -->
-
         <?php if ( isset($_GET['success'])): ?>
-            <div class="container">
-                <div class="alert alert-success">
+            <div class="container col-3">
+                <div class="alert alert-success w-100">
                     L'action a bien été enregistrée
                 </div>
             </div>
+            <?php endif; ?>
+
+
+            <?php $indicesServer = $_SERVER['REQUEST_URI'] ;
+        $test = explode('/', $indicesServer);
+        if(isset($test[5])):        
+            if ( $test[5] == 'success'): ?>
+                <div class="container col-3">
+                    <div class="alert alert-success w-100">
+                    L'action a bien été enregistrée
+                    </div>
+                </div>
+
+           
+
+        <?php endif; ?>   
+         
+
+    
 
         <?php endif; ?>
         
@@ -51,15 +69,15 @@ $end=(clone $start)->modify("+6 days");
 
 
 
-         <div>
+         <div class="d-flex flex-row justify-content-between align-items-center col-3">
              
-            <a href="/phpMed/connexion/<?=$_SESSION['type']?>/calendrier?week=<?= $week->previousMonth()->week ?>&year=<?= $week->previousMonth()->year; ?>" class="btn btn-primary"> Mois -1</a>
-            <a href="/phpMed/connexion/<?=$_SESSION['type']?>/calendrier?week=<?= $week->nextMonth()->week;?>&year=<?= $week->nextMonth()->year; ?>" class="btn btn-primary">Mois +1</a>
+            <a href="/phpMed/connexion/<?=$_SESSION['type']?>/calendrier?week=<?= $week->previousMonth()->week ?>&year=<?= $week->previousMonth()->year; ?>" class="mx-1 btn btn-primary"> Mois -1</a>
+            <a href="/phpMed/connexion/<?=$_SESSION['type']?>/calendrier?week=<?= $week->nextMonth()->week;?>&year=<?= $week->nextMonth()->year; ?>" class="mx-1 btn btn-primary">Mois +1</a>
 
 
 
-            <a href="/phpMed/connexion/<?=$_SESSION['type']?>/calendrier?year=<?= $week->previousWeek()->year; ?>&week=<?= $week->previousWeek()->week; ?>" class="btn btn-primary"> semaine -1</a>
-            <a href="/phpMed/connexion/<?=$_SESSION['type']?>/calendrier?year=<?= $week->nextWeek()->year; ?>&week=<?= $week->nextWeek()->week; ?>" class="btn btn-primary">semaine +1</a>
+            <a href="/phpMed/connexion/<?=$_SESSION['type']?>/calendrier?year=<?= $week->previousWeek()->year; ?>&week=<?= $week->previousWeek()->week; ?>" class="mx-1 btn btn-primary"> semaine -1</a>
+            <a href="/phpMed/connexion/<?=$_SESSION['type']?>/calendrier?year=<?= $week->nextWeek()->year; ?>&week=<?= $week->nextWeek()->week; ?>" class="mx-1 btn btn-primary">semaine +1</a>
         </div>
 
     </div>
@@ -82,10 +100,10 @@ $end=(clone $start)->modify("+6 days");
             
             <div class="calendar__weekday"><?= $day; ?></div>
             
-            <a class="calendar__day" href="add.php?date=<?= $date->format('Y-m-d'); ?>"><?= $date->format('d'); ?></a>
+            <a class="calendar__day" href="\phpmed\connexion\patient\calendrier\add?date=<?= $date->format('Y-m-d'); ?>"><?= $date->format('d'); ?></a>
             <?php foreach ($eventsForDay as $event): ?>
                 <div class="calendar__event">
-                   <?= (new DateTime($event['start']))->format('H:i') ?> -  <a href="\phpmed\connexion\patient\calendrier\edit?id=<?= $event['id'];?>"> <?= h($event['name']); ?> </a> <a href="delete.php?id=<?= $event['id'];?>"> &#10060 </a>
+                   <?= (new DateTime($event['start']))->format('H:i') ?> -  <a href="\phpmed\connexion\patient\calendrier\edit?id=<?= $event['id'];?>"> <?= h($event['name']); ?> </a> <a href="\phpmed\connexion\patient\calendrier\delete?id=<?= $event['id'];?>"> &#10060 </a>
                 </div>
 
 
