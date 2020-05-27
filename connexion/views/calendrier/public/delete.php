@@ -7,6 +7,8 @@ $pdo= get_pdo();
 $events = new Calendar\Events($pdo);
 $errors = [];
 $type = $_SESSION['type'];
+$idpat = $_SESSION['idpat'];
+$idprat = $_SESSION['idprat'];
 
 try {
     $event = $events->find($_GET['id'] ?? null);
@@ -19,11 +21,13 @@ try {
 
 
 $data = [
-    'name' => $event->getName(),
+    
     'date' => $event->getStart()->format('Y-m-d'),
     'start' => $event->getStart()->format('H:i'),
     'end' => $event->getEnd()->format('H:i'),
-    'description' => $event->getDescription()
+    'description' => $event->getDescription(),
+    'idpat' => $idpat,
+    'idprat' => $idprat
 ];
 
 

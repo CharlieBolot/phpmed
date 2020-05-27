@@ -30,6 +30,7 @@ class Events{
         return $results;
     }
 
+
   /**
      *  permet de récupérer les évenements commencant  entre 2 dates indexé par jour
      * 
@@ -80,10 +81,12 @@ class Events{
 
 
     public function hydrate (Event $event, array $data ){
-        $event->setName($data['name']);
+        
         $event->setDescription($data['description']);
         $event->setStart(\DateTime::createFromFormat('Y-m-d H:i', $data['date'] . ' '. $data['start'])->format('Y-m-d H:i:s'));
         //$event->setEnd(\DateTime::createFromFormat('Y-m-d H:i', $data['date'] . ' ' . $data['end'])->format('Y-m-d H:i:s'));
+        $event->setIdpraticien($data['idprat']);
+        $event->setIdpat($data['idpat']);
         return $event;
     }
 
@@ -97,12 +100,14 @@ class Events{
 
     public function create(Event $event): bool {
 
-        $statement = $this->pdo->prepare('INSERT INTO events (name, description, start, end) VALUES (?,?,?,?) ');
+        $statement = $this->pdo->prepare('INSERT INTO events ( description, start, end, idpat, idprat) VALUES (?,?,?,?,?) ');
         return $statement->execute([
-            $event->getName(),
+            
             $event->getDescription(),
             $event->getStart()->format('Y-m-d H:i:s'),
             $event->getEnd()->format('Y-m-d H:i:s'),
+            $event->getIdpat(),
+            $event->getIdpraticien()
 
         ]);
         
@@ -118,9 +123,9 @@ class Events{
 
 
     public function update(Event $event): bool {
-        $statement = $this->pdo->prepare('UPDATE events SET name = ?, description = ?, start = ? , end = ? WHERE id = ? ');
+        $statement = $this->pdo->prepare('UPDATE events SET description = ?, start = ? , end = ? WHERE id = ? ');
         return $statement->execute([
-            $event->getName(),
+            
             $event->getDescription(),
             $event->getStart()->format('Y-m-d H:i:s'),
             $event->getEnd()->format('Y-m-d H:i:s'),

@@ -4,12 +4,19 @@ require_once 'connexion\src\Calendar\EventValidator.php';
 require_once 'connexion\src\Calendar\Event.php';
 require_once 'connexion\src\Calendar\Events.php';
 $type = $_SESSION['type'];
+$idpat = $_SESSION['idpat'];
+$idprat = $_SESSION['idprat'];
+
 $data = [
     'date' => $_GET['date'] ?? date('y-m-d'),
     'start' => date('H:i'),
-    'end' => date('H:i')
+    'end' => date('H:i'),
+    'idpat' => $idpat,
+    'idprat' => $idprat
 
 ];
+
+
 $validator = new \App\Validator($data);
 if(!$validator->validate('date','date')){
     $data['date'] = date('y-m-d');
@@ -17,6 +24,7 @@ if(!$validator->validate('date','date')){
 $errors = [];
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $data = $_POST;
+    //var_dump($data);
     $errors = [];
     $validator = new Calendar\EventValidator();
     $errors = $validator->validates($_POST);
@@ -24,6 +32,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $events = new \Calendar\Events(get_pdo());
         $event = $events->hydrate(new \Calendar\Event(),$data);
         $events->create($event);
+        //var_dump($event);
         header('Location: /phpmed/connexion/'.$type.'/calendrier/success');
         exit ();
     }
@@ -31,6 +40,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 }
 render('inc/header.php', ['title' => 'Ajouter un évenement']);
 ?>
+
 
 
 
@@ -52,7 +62,7 @@ render('inc/header.php', ['title' => 'Ajouter un évenement']);
         <?php render('connexion/views/calendrier/public/views/calendar/form.php',['data' => $data, 'errors' => $errors]); ?>
     
             <div class="form-group">
-                <button class="btn btn-primary">Ajouter l'évènement</button>
+                <button class="btn btn-primary">Ajouter le rendez-vous</button>
             </div>
         </div>
     </form>

@@ -2,10 +2,13 @@
 require_once 'connexion/bdd/bdd.php';
 require_once 'connexion/src/medecin.php';
 require_once 'connexion/src/medecinDAO.php';
+require_once 'connexion/src/patient.php';
+require_once 'connexion/src/patientDAO.php';
 require_once 'connexion/src/Calendar/Week.php';
 
 $pdo = get_pdo();
 $medecinDAO = new medecinDAO($pdo);
+$patientDAO = new patientDAO($pdo);
 if(isset($_GET['week'])){
     $sem = $_GET['week'];
     $yea = $_GET['year'];
@@ -15,6 +18,7 @@ if(isset($_GET['id'])){
     $id = $_GET['id'] ;
     $prat = $_GET['idprat'];
 }
+
 
 require_once 'connexion\src\Calendar\Events.php';
 $events = new Calendar\Events($pdo); 
@@ -26,8 +30,10 @@ $start= $week->premierdelasemaine();
 
 // Fin de semaine en cours
 $end=(clone $start)->modify("+6 days");
-  
-    $events = $events->getEventsBetweenByDay($start,$end);
+
+//Evènement de la semaine
+$events = $events->getEventsBetweenByDay($start,$end);
+
 
 ?>
 
@@ -82,44 +88,62 @@ $end=(clone $start)->modify("+6 days");
 
     </div>
 
-
-    <table class="calendar__table "> <!--calendar__table--\<\?= $weeks; ?>weeks"-->
-
-    
-
-    
-    <tr>
-       
+    <?php if($_SESSION['type'] == 'praticien'):?>
+        <table class="calendar__table "> <!--calendar__table--\<\?= $weeks; ?>weeks"-->
+        <tr>
         <?php 
             foreach($week->days as $k => $day): 
-           $date =  (clone $start)->modify("+" . $k."days");
-           $eventsForDay = $events[$date->format('Y-m-d')] ?? [];
-           $isToday = date('Y-m-d') === $date->format('Y-m-d');
+                $date =  (clone $start)->modify("+" . $k."days");
+                $eventsForDay = $events[$date->format('Y-m-d')] ?? [];
+                $isToday = date('Y-m-d') === $date->format('Y-m-d');
             ?>
-        <td class="<?= $isToday ? 'is-today' : ''; ?> ">
-            
-            <div class="calendar__weekday"><?= $day; ?></div>
-            
-            <a class="calendar__day" href="\phpmed\connexion\patient\calendrier\add?date=<?= $date->format('Y-m-d'); ?>"><?= $date->format('d'); ?></a>
-            <?php foreach ($eventsForDay as $event): ?>
-                <div class="calendar__event">
-                   <?= (new DateTime($event['start']))->format('H:i') ?> -  <a href="\phpmed\connexion\patient\calendrier\edit?id=<?= $event['id'];?>"> <?= h($event['name']); ?> </a> <a href="\phpmed\connexion\patient\calendrier\delete?id=<?= $event['id'];?>"> &#10060 </a>
-                </div>
+            <td class="<?= $isToday ? 'is-today' : ''; ?> "> 
+                <div class="calendar__weekday"><?= $day; ?></div>
+                <a class="calendar__day" href="\phpmed\connexion\patient\calendrier\add?date=<?= $date->format('Y-m-d'); ?>"><?= $date->format('d'); ?></a>
+                <?php foreach ($eventsForDay as $event): ?>
+                    <div class="calendar__event">
+                       <?= (new DateTime($event['start']))->format('H:i') ?> -  <a href="\phpmed\connexion\patient\calendrier\edit?id=<?= $event['id'];?>"> <?= h($event['name']); ?> </a> <a href="\phpmed\connexion\patient\calendrier\delete?id=<?= $event['id'];?>"> &#10060 </a>
+                    </div>
+                <?php endforeach; ?>
 
-
-            <?php endforeach; ?>
-
-        </td>
+            </td>
         <?php endforeach; ?>
             
-    </tr>
+        </tr>
+        </table>
+        <a href="\phpmed\connexion\<?=$_SESSION['type']?>\calendrier\add" class="calendar__button">+</a>
+    
+    <?php else :?>
+        <table class="calendar__table "> 
+        <tr>
+        <?php 
+            foreach($week->days as $k => $day): 
+                $date =  (clone $start)->modify("+" . $k."days");
+                $eventsForDay = $events[$date->format('Y-m-d')] ?? [];
+                $isToday = date('Y-m-d') === $date->format('Y-m-d');
+            ?>
+            <td class="<?= $isToday ? 'is-today' : ''; ?> "> 
+                <div class="calendar__weekday"><?= $day; ?></div>
+                <a class="calendar__day" href="\phpmed\connexion\patient\calendrier\add?date=<?= $date->format('Y-m-d'); ?>"><?= $date->format('d'); ?></a>
+                <?php foreach ($eventsForDay as $event): ?>
+                    <?php if($event['idpat'] === $_SESSION['idpat']): ?>
+                        <div class="calendar__event">
+                            <?= (new DateTime($event['start']))->format('H:i') ?> -  <a href="\phpmed\connexion\patient\calendrier\edit?id=<?= $event['id'];?>"> <?= h($patientDAO->getpatient($_SESSION['idpat'])->getNom().' '.$patientDAO->getpatient($_SESSION['idpat'])->getPrenom()); ?> </a> <a href="\phpmed\connexion\patient\calendrier\delete?id=<?= $event['id'];?>"> &#10060 </a>
+                        </div>
+                    <?php else :?>
+                        <div class="calendar__event">
+                            <?= (new DateTime($event['start']))->format('H:i') ?> -  occupé jusqu'à <?= (new DateTime($event['start']))->modify('+20 min')->format('H:i') ?>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
 
-
-
-    </table>
-
-
-    <a href="\phpmed\connexion\patient\calendrier\add" class="calendar__button">+</a>
+            </td>
+        <?php endforeach; ?>
+            
+        </tr>
+        </table>
+        <a href="\phpmed\connexion\<?=$_SESSION['type']?>\calendrier\add" class="calendar__button">+</a>
+    <?php endif;?>
 
 </div>
 

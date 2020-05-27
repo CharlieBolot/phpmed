@@ -3,9 +3,11 @@ require_once 'inc/header.php';
 require_once 'connexion/bdd/bdd.php';
 require_once 'connexion/src/patient.php';
 require_once 'connexion/src/patientDAO.php';
+require_once 'connexion/function/nextrdv.php';
 $pdo= get_pdo();
 $patientDAO = new patientDAO($pdo);
 $listePatient = $patientDAO->getlist();
+
 ?>  
 <div class="row ">  
     
@@ -67,9 +69,38 @@ $listePatient = $patientDAO->getlist();
         <br>
         <div class="col-sm-12" >
                 <h4>Votre prochain rendez-vous :</h4>
-                <div>
-                    <!-- TODO afficher le prochain rdv --->
+                <?php if(!empty($nextrdv)):?>
+                <div>                    
+                    <div class="form-group">
+                        <ul>
+                            <li> Patient :
+                        <div id="nom" type="texte" required class="form-control" name="nom" ><?= $nextpat[0]['nom'] ?> <?= $nextpat[0]['prenom'] ?></div>
+                            </li>
+                            <li> Numero de téléphone :
+                        <div id="numtel" type="texte" required class="form-control" name="numtel" ><?= $nextpat[0]['numtel'] ?></div>
+                            </li>
+                            <li> Adresse :
+                        <div id="adresse" type="texte" required class="form-control" name="adresse" ><?= $nextpat[0]['adresse'] ?> à <?= $nextpat[0]['ville'] ?> </div>
+                            </li>
+                            <li> Motif du R.D.V :
+                        <div id="adresse" type="texte" required class="form-control" name="adresse" ><?= $nextrdv['description'] ?> </div>
+                            </li>
+                            <li> Heure de début :
+                        <div id="adresse" type="texte" required class="form-control" name="adresse" ><?= $nexttime ?> </div>
+                            </li>
+
+                        </ul>
+            
+                     </div>
+
                 </div>
+                <?php else :?>
+                    <div>
+                        <ul>                    
+                            <li><h5> Aucun rendez-vous restant aujourd'hui </h5></li>
+                        </ul>
+                     </div>
+                <?php endif; ?>
 
         </div>
     </div>

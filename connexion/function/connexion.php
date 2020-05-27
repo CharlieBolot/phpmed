@@ -13,7 +13,7 @@ $pdo = get_pdo();
         if($data['id']>0){
             $_SESSION['mail'] = $data['mail'];
 	        $_SESSION['mdp'] = $data['mdp'];
-            $_SESSION['id'] = $data['id'];
+            $_SESSION['idpat'] = $data['id'];
             $_SESSION['nom'] = $data['nom'];
 	        $_SESSION['prenom'] = $data['prenom'];
             $_SESSION['numtel'] = $data['numtel'];
@@ -21,8 +21,8 @@ $pdo = get_pdo();
             $_SESSION['ville'] = $data['ville'];
             $_SESSION['cp'] = $data['cp'];
             $_SESSION['idprat'] = $data['idprat'];
-            $_SESSION['week'] = date('W');
-            $_SESSION['year'] = date('Y');
+            //$_SESSION['week'] = date('W');
+            //$_SESSION['year'] = date('Y');
             $_SESSION['type']='patient';
             header('Location:  /phpMed/connexion/patient/profil');
         

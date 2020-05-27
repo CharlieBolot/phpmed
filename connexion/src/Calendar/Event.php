@@ -6,8 +6,8 @@ use DateTime;
 class Event{
     private $id;
     private $idpat;
-    private $idpraticien;
-    private $name;
+    private $idprat;
+    
     private $description;
     private $start;
     private $end;
@@ -16,17 +16,15 @@ class Event{
         return $this->id;
     }
 
-    public function getIdpat(): int{
+    public function getIdpat(){
         return $this->idpat;
     }
 
     public function getIdpraticien(): int{
-        return $this->idpraticien;
+        return $this->idprat;
     }
 
-    public function getName(): string{
-        return $this->name;
-    }
+   
     public function getDescription(): string{
         return $this->description ?? '';
     }
@@ -42,10 +40,6 @@ class Event{
         return $timeend;
     }
 
-    public function setName(string $name) {
-        $this->name = $name;
-    }
-
     public function setDescription(string $description) {
         $this->description = $description;
     }
@@ -56,6 +50,14 @@ class Event{
 
     public function setEnd(string $end) {
         $this->end = $end;
+    }
+
+    public function setIdpraticien(string $idprat){
+        $this->idprat = $idprat;
+    }
+
+    public function setIdpat(string $idpat){
+        $this->idpat = $idpat;
     }
 
 }

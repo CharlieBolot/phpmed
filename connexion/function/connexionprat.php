@@ -13,7 +13,7 @@ $pdo = get_pdo();
         if($data['id']>0){
             $_SESSION['mail'] = $data['mail'];
 	        $_SESSION['mdp'] = $data['mdp'];
-            $_SESSION['id'] = $data['id'];
+            $_SESSION['idprat'] = $data['id'];
             $_SESSION['nom'] = $data['nom'];
 	        $_SESSION['prenom'] = $data['prenom'];
             $_SESSION['type']='praticien';
