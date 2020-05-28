@@ -25,10 +25,6 @@ function get_pdo(): PDO {
     
  }
 
-
-
-
-
 function e404(){
      require 'connexion\views\404.php'; 
      exit();
@@ -48,7 +44,6 @@ function render(string $view, $parameters = []){
      include_once "{$view}";
  
  }
- 
  ?>
  
 

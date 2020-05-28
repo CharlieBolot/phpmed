@@ -102,7 +102,10 @@ $events = $events->getEventsBetweenByDay($start,$end);
                 <a class="calendar__day" href="\phpmed\connexion\patient\calendrier\add?date=<?= $date->format('Y-m-d'); ?>"><?= $date->format('d'); ?></a>
                 <?php foreach ($eventsForDay as $event): ?>
                     <div class="calendar__event">
-                       <?= (new DateTime($event['start']))->format('H:i') ?> -  <a href="\phpmed\connexion\patient\calendrier\edit?id=<?= $event['id'];?>"> <?= h($event['name']); ?> </a> <a href="\phpmed\connexion\patient\calendrier\delete?id=<?= $event['id'];?>"> &#10060 </a>
+                        <?php $patient = $patientDAO->getpatient($event['idpat']) ;
+                        $nompat = $patient->getNom().' '.$patient->getPrenom();
+                        ?>
+                       <?= (new DateTime($event['start']))->format('H:i') ?> -  <a href="\phpmed\connexion\patient\calendrier\edit?id=<?= $event['id'];?>"> <?= h($nompat); ?> </a> <a href="\phpmed\connexion\patient\calendrier\delete?id=<?= $event['id'];?>"> &#10060 </a>
                     </div>
                 <?php endforeach; ?>
 

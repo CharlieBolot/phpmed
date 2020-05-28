@@ -7,7 +7,11 @@ $pdo= get_pdo();
 $events = new Calendar\Events($pdo);
 $errors = [];
 $type = $_SESSION['type'];
-$idpat = $_SESSION['idpat'];
+if(isset($_SESSION['idpat'])){
+    $idpat = $_SESSION['idpat'];
+}else{
+    $idpat = '';
+};
 $idprat = $_SESSION['idprat'];
 
 try {

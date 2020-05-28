@@ -6,16 +6,21 @@
     <link rel="stylesheet" href="/phpMed/calendrier/public/css/calendar.css">
     <?php session_start(); ?>
     <title>PhpMed</title>
+    <nav class="navbar navbar-dark bg-primary mb-3">
+        <?php if(!empty($_SESSION['type'])) :?>
+                <a href="/phpMed/connexion/<?=$_SESSION['type']?>/" class="navbar-brand"><!--Mon calendrier-->PhpMed</a>
+                <?php if($_SERVER['REQUEST_URI'] != '/phpMed/connexion/'.$_SESSION['type'].'/profil' ):?>
+                <a href="/phpMed/connexion/<?=$_SESSION['type']?>/profil" class="navbar-brand"><!--Mon calendrier-->Retour menu</a>
+                <?php endif; ?>
+                <a href="/phpMed/navigation/deco.php" class="navbar-brand"><!--Mon calendrier-->Deconnexion</a>
 
-    <?php if(!empty($_SESSION['type'])) :?>
-        <nav class="navbar navbar-dark bg-primary mb-3">
-            <a href="/phpMed/connexion/<?=$_SESSION['type']?>/" class="navbar-brand"><!--Mon calendrier-->PhpMed</a>
-        </nav>
-    <?php else :?>
-        <nav class="navbar navbar-dark bg-primary mb-3">
-            <a href="/phpMed/connexion/" class="navbar-brand"><!--Mon calendrier-->PhpMed</a>
-        </nav>
-    <?php endif ; ?>
+            
+        <?php else :?>
+                <a href="/phpMed/" class="navbar-brand"><!--Mon calendrier-->PhpMed</a>
+                
+            
+        <?php endif ; ?>
+    </nav>
 </head>
 <body>
 

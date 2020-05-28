@@ -6,7 +6,7 @@ $next = [];
 
 
 $pdo= get_pdo();
-$query=$pdo->prepare('SELECT * FROM events WHERE idprat = :idprat AND start > CURDATE() AND DATE(start) = DATE(NOW())');
+$query=$pdo->prepare('SELECT * FROM events WHERE idprat = :idprat AND DATE_format(start, \'%d/%m/%Y%H/%i/%s\') > DATE_format(NOW(), \'%d/%m/%Y%H/%i/%s\') AND DATE(start) = DATE(NOW())');
 $query->bindValue(':idprat',$idprat, PDO::PARAM_STR);
 
 $query->execute();

@@ -29,10 +29,10 @@
         }
         elseif($page[5] === 'modif'){
           if(empty($page[6])){
-            require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'patient'.DIRECTORY_SEPARATOR.'modif.php';
+            require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'update.php';
           }
           elseif($page[6] === 'update'){
-            require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'update.php';
+            require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'patient'.DIRECTORY_SEPARATOR.'patprofil.php';
           }
         }
       }
@@ -82,7 +82,21 @@
         require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'pratcon.php';
       }
       elseif($page[4] === 'calendrier'){
+        if(empty($page[5])){
         require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'calend.php';
+        }
+        elseif(($page[5]) === 'add'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'add.php';
+        }
+        elseif(($page[5]) === 'edit'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'edit.php';
+        }
+        elseif(($page[5]) === 'delete'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'delete.php';
+        }
+        elseif(($page[5]) === 'success'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'calend.php';
+        }
       }
       elseif($page[4] === 'mail'){
         require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'mail.php';

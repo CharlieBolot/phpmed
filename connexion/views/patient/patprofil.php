@@ -10,8 +10,32 @@ $id = $_SESSION['idprat'];
 $medecin = $medecinDAO->getmedecin($id);
 ?>
 
+<div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
+
+
+        
+
+        
+            <?php $indicesServer = $_SERVER['REQUEST_URI'] ;
+            $test = explode('/', $indicesServer);
+            if(isset($test[6])):        
+                if ( $test[6] == 'update'): ?>
+                    <div class="container">
+                        <div class="alert alert-success">
+                        Votre profil a bien été mis à jour
+                        </div>
+                    </div>
+
+                <?php endif; ?>
+            <?php endif; ?>   
+            
+
+        </div>
     
 <div class="row ">  
+
+    
+
     
 
     <div class="col-sm-6"> 
@@ -20,50 +44,61 @@ $medecin = $medecinDAO->getmedecin($id);
                     <h2><?= $_SESSION['nom'].' '.$_SESSION['prenom'] ?></h2>
                 </div>
             </div>
+
+
+
     
-        <div class="form-group">
+        <form method="post" class="form-group" action="/phpMed/connexion/patient/profil/modif/">
             <ul>
                 <li> Nom :
-            <div id="nom" type="texte" required class="form-control" name="nom" ><?= $_SESSION['nom'] ?></div>
+            <input id="nom" type="texte" required class="form-control" name="nom" value='<?= $_SESSION['nom'] ?>'>
                 </li>
                 <li> Prenom :
-            <div id="prenom" type="texte" required class="form-control" name="prenom" ><?= $_SESSION['prenom'] ?></div>
+            <input id="prenom" type="texte" required class="form-control" name="prenom" value='<?= $_SESSION['prenom'] ?>'>
                 </li>
                 <li> Numero de téléphone :
-            <div id="numtel" type="texte" required class="form-control" name="numtel" ><?= $_SESSION['numtel'] ?></div>
+            <input id="numtel" type="texte" required class="form-control" name="numtel" value='<?= $_SESSION['numtel'] ?>'>
                 </li>
                 <li> Adresse :
-            <div id="adresse" type="texte" required class="form-control" name="adresse" ><?= $_SESSION['adresse'] ?></div>
+            <input id="adresse" type="texte" required class="form-control" name="adresse" value='<?= $_SESSION['adresse'] ?>'>
                 </li>
                 <li> Ville :
-            <div id="ville" type="texte" required class="form-control" name="ville" ><?= $_SESSION['ville'] ?></div>
+            <input id="ville" type="texte" required class="form-control" name="ville" value='<?= $_SESSION['ville'] ?>'>
                 </li>
                 <li> Code Postal :
-            <div id="cp" type="texte" required class="form-control" name="cp"><?= $_SESSION['cp'] ?></div>
+            <input id="cp" type="texte" required class="form-control" name="cp" value='<?= $_SESSION['cp'] ?>'>
                 </li>
                 <li> Adresse mail :
-            <div id="mail" type="email" required class="form-control" name="mail"><?= $_SESSION['mail'] ?></div>
+            <input id="mail" type="email" required class="form-control" name="mail" value='<?= $_SESSION['mail'] ?>'>
                 </li>
                 <li> Mot de passe :
-            <div id="mdp" type="password" required class="form-control" name="mdp"><?= $_SESSION['mdp'] ?></div>
+            <input id="mdp" type="password" required class="form-control" name="mdp" value='<?= $_SESSION['mdp'] ?>'>
                 </li>
                 <li> Praticien :
-                
+                <input id="idprat" type="hidden" required class="form-control" name="idprat" value='<?= $_SESSION['idprat'] ?>'>
                     <div>Dr. <?= $medecin->getNom().' '.$medecin->getPrenom() ?></div>
                     <div> Mail :  <?= $medecin->getMail() ?></div>
                 </li>
             </ul>
-            
-        </div>
+
+
+            <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
+                <div class="form-group">
+                    <button class="btn btn-primary" >Valider les modifications</button>
+                </div>
+            </div>
+        </form>    
+      
+        
         <form action='/phpMed/connexion/patient/calendrier'>
             <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
                 <div class="form-group">
-                    <button class="btn btn-primary" >RDV</button>
+                    <button class="btn btn-primary" >Consulter les rendez-vous</button>
                 </div>
             </div>
         </form>   
             
-    </div>
+    
 </div>
 
 

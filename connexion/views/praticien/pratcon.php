@@ -27,11 +27,11 @@ $listeMedecin = $medecinDAO->getList();
 
   
 
-<div class="row ">  
-    <div class="col-sm-6">
+<div class="row justify-content-center">  
+    <div class="col-xl-4 col-lg-4 ">
         <form method="post" class="form" action="/phpMed/connexion/praticien/connec">
             
-            <div class="col-sm-12">
+            <div class="col-sm-12 ">
                     <div class="form-group">
                         <h2 >Vos identifiants</h2>
                         

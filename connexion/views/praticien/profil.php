@@ -8,18 +8,20 @@ $pdo= get_pdo();
 $patientDAO = new patientDAO($pdo);
 $listePatient = $patientDAO->getlist();
 
-?>  
-<div class="row ">  
+?> 
+
+ <h2 class="text-center">Bienvenu docteur <?= $_SESSION['prenom'].' '.$_SESSION['nom'] ?></h2>
+<div class="row d-flex flex-row justify-content-center">  
     
 
-    <div class="col-sm-6">
+    <div class="col-xl-3 col-lg-5 mr-4">
         
           <div class="col-sm-12">
                 <div class="form-group">
-                        <h2>Bienvenu docteur <?= $_SESSION['prenom'].' '.$_SESSION['nom'] ?></h2>
+                       
                         <h3> Que voulez-vous faire ?<h3>
                             <div class='btn-group-vertical btn-group-sm mb-3 ' role="group" aria-label="optionprat">                                    
-                                <button type="button" class="btn btn-primary text-left" >Consulter vos rendez-vous</button>                                
+                                <form action ='/phpMed/connexion/praticien/calendrier'> <button type="submit" class="btn btn-primary text-left" >Consulter vos rendez-vous</button>     </form>                           
                                 <button type="button" class="btn btn-primary text-left" >Consulter la liste des patients</button>
                                 <button type="button" class="btn btn-primary text-left" >Consulter vos emails</button>   
                             </div>
@@ -36,7 +38,7 @@ $listePatient = $patientDAO->getlist();
                 <?php if(!empty($_SESSION['message'])):?>
                         <?php $taille = count($_SESSION['message']); 
                         for($i=0;$i<$taille;$i++):?>
-                            <div class="container form-control">
+                            <div class="container">
                                 <?php print_r($_SESSION['message'][$i]);?>
                             </div>
                         <?php endfor;?>
@@ -55,7 +57,7 @@ $listePatient = $patientDAO->getlist();
 
             </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-xl-5 col-lg-7 ml-4">
             <div class="form-group">
                         <h2>&nbsp</h2>
             </div>
@@ -68,39 +70,35 @@ $listePatient = $patientDAO->getlist();
         </div>
         <br>
         <div class="col-sm-12" >
-                <h4>Votre prochain rendez-vous :</h4>
+            <fieldset>
+                <legend>Votre prochain rendez-vous :</legend>
                 <?php if(!empty($nextrdv)):?>
                 <div>                    
-                    <div class="form-group">
-                        <ul>
-                            <li> Patient :
-                        <div id="nom" type="texte" required class="form-control" name="nom" ><?= $nextpat[0]['nom'] ?> <?= $nextpat[0]['prenom'] ?></div>
-                            </li>
-                            <li> Numero de téléphone :
-                        <div id="numtel" type="texte" required class="form-control" name="numtel" ><?= $nextpat[0]['numtel'] ?></div>
-                            </li>
-                            <li> Adresse :
-                        <div id="adresse" type="texte" required class="form-control" name="adresse" ><?= $nextpat[0]['adresse'] ?> à <?= $nextpat[0]['ville'] ?> </div>
-                            </li>
-                            <li> Motif du R.D.V :
-                        <div id="adresse" type="texte" required class="form-control" name="adresse" ><?= $nextrdv['description'] ?> </div>
-                            </li>
-                            <li> Heure de début :
-                        <div id="adresse" type="texte" required class="form-control" name="adresse" ><?= $nexttime ?> </div>
-                            </li>
+                    <div class="form-group pr-5 text-justify" style="padding-left:100px;">
+                        
+                            <p id="nom" style="text-indent:-100px;"> <b>Patient :</b> <?= $nextpat[0]['nom'] ?>  <?= $nextpat[0]['prenom'] ?></p>
+                             
+                            <p id="numtel" style="text-indent:-100px;"> <b>Numero de téléphone : </b><?= $nextpat[0]['numtel'] ?></p>
+                          
+                            <p id="adresse" style="text-indent:-100px;"> <b>Adresse : </b><?= $nextpat[0]['adresse'] ?> à <?= $nextpat[0]['ville'] ?> </p>
+                                
+                            <p id="adresse" style="text-indent:-100px;"><b>Motif du R.D.V :</b> <?= $nextrdv['description'] ?> </p>
+                                
+                            <p id="adresse" style="text-indent:-100px;"><b>Heure de début : </b><?= $nexttime ?> </p>
+                            
 
-                        </ul>
+                        
             
                      </div>
 
                 </div>
                 <?php else :?>
-                    <div>
-                        <ul>                    
-                            <li><h5> Aucun rendez-vous restant aujourd'hui </h5></li>
-                        </ul>
+                    <div>                  
+                            <h5> Aucun rendez-vous restant aujourd'hui !</h5>       
                      </div>
                 <?php endif; ?>
+
+            </fieldset>
 
         </div>
     </div>
