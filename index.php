@@ -76,7 +76,12 @@
         require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'connexionprat.php';
       }
       elseif($page[4] === 'profil'){
-        require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'profil.php';
+        if(empty($page[5])){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'profil.php';
+          }
+          elseif(($page[5]) === 'fiche'){
+            require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'fichepat.php';
+          }
       }
       elseif($page[4] === 'wrong'){
         require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'pratcon.php';
@@ -116,7 +121,7 @@
             require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'profil.php';
           }
           elseif($page[6] === 'ordonnance'){
-            require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'ordo.php';
+            require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'ordonnance.php';
           }      
         }
       }      

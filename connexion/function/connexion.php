@@ -5,8 +5,9 @@ $pdo = get_pdo();
     $message='';
     
    
-        $query=$pdo->prepare('SELECT * FROM patient WHERE mail = :mail');
+        $query=$pdo->prepare('SELECT * FROM patient WHERE mail = :mail AND mdp = :mdp');
         $query->bindValue(':mail',$_POST['mail'], PDO::PARAM_STR);
+        $query->bindValue(':mdp',$_POST['mdp'], PDO::PARAM_STR);
         $query->execute();
         $data=$query->fetch();
 

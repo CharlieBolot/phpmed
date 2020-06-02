@@ -8,6 +8,7 @@ $pdo= get_pdo();
 $patientDAO = new patientDAO($pdo);
 $listePatient = $patientDAO->getlist();
 
+
 ?> 
 
  <h2 class="text-center">Bienvenu docteur <?= $_SESSION['prenom'].' '.$_SESSION['nom'] ?></h2>
@@ -106,6 +107,10 @@ $listePatient = $patientDAO->getlist();
 
 
 </div>
+
+
+
+
             
                 
 

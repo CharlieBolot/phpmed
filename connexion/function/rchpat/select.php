@@ -6,6 +6,7 @@ $pdo= get_pdo();
 // echo('<br>');
 
     $message=[];
+    $_SESSION['fiche']=[];
     
    
         $query=$pdo->prepare('SELECT * FROM patient WHERE nom = :nom OR prenom = :prenom');
@@ -31,8 +32,9 @@ $pdo= get_pdo();
                     $ville = $data[$i]['ville'];
                     $cp = $data[$i]['cp'];
                     $numtel = $data[$i]['numtel'];
-                    
-                    $message[$i] = $prenom.' '.$nom.' résidant '.$adresse.' '.$ville.' '.$cp.' Tel : '.$numtel.' @Mail : '.'<a href="mailto:?to='.$mail.'">'.$mail.'</a>';
+                    $message[$i] = $prenom.' '.$nom.' résidant '.$adresse.' '.$ville.' '.$cp.' Tel : '.$numtel.' @Mail : '.'<a href="mailto:?to='.$mail.'">'.$mail.'</a>'.' '.'<a href="/phpMed/connexion/praticien/profil/fiche?id='.$i.'" class="btn btn-outline-dark btn-sm">Fiche patient</a>';
+                    $fiche[$i] = [$mail, $nom, $prenom ,$adresse ,$ville , $cp ,$numtel];
+                    $_SESSION['fiche'][$i]=$fiche[$i];
                     
                 }
                 //header('Location:  /phpMed/connexion/praticien/profil'); 
