@@ -1,0 +1,63 @@
+[
+{"type":"header","version":"4.9.2","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"tutocalendar"},
+{"type":"table","name":"events","database":"tutocalendar","data":
+[
+{"id":"8","description":"","start":"2020-01-08 07:20:00","end":"2020-01-08 07:25:00","idpat":"1","idprat":"1"},
+{"id":"34","description":"j'ai mal aux ventres","start":"2020-04-08 09:40:00","end":"2020-04-22 10:00:00","idpat":"2","idprat":"1"},
+{"id":"33","description":"fg","start":"2020-04-08 14:20:00","end":"2020-05-25 14:40:00","idpat":"3","idprat":"1"},
+{"id":"31","description":"J'ai mal aux pieds","start":"2020-04-08 11:40:00","end":"2020-05-25 12:00:00","idpat":"11","idprat":"1"},
+{"id":"37","description":"mal aux pieds","start":"2020-05-15 14:00:00","end":"2020-05-15 14:20:00","idpat":"2","idprat":"1"},
+{"id":"86","description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin euismod sed risus vitae pharetra. Aenean scelerisque faucibus diam, nec consequat massa rutrum et. Nullam id purus at erat malesuada facilisis id sed odio. Quisque tincidunt dolor ultrices accumsan ultricies. Donec risus leo, egestas sit amet finibus tincidunt, iaculis nec urna. Curabitur bibendum, lorem eu ultricies vestibulum, neque erat semper orci, sed consectetur purus massa eget metus. Morbi eget pellentesque ante. Suspendisse potenti. Etiam sed lobortis risus, vel lobortis sem. Donec congue lectus purus. Nunc molestie sem massa, quis pharetra massa feugiat id. Mauris feugiat, metus at pellentesque faucibus, sem lorem rhoncus lectus, vitae iaculis ex mauris in nulla. Aliquam luctus urna vel velit commodo, et blandit felis finibus. Sed accumsan quam diam, sed scelerisque tortor dignissim eget.\r\n\r\nIn congue pretium est nec accumsan. Sed nec mollis est. Ut nec tortor tristique, eleifend risus ut, tempus dui. In hac habitasse platea dictumst. Suspendisse at pretium nibh. Etiam condimentum risus id leo viverra, in ultrices diam condimentum. Donec consectetur ac nulla non pharetra. Donec vel justo et nisi venenatis accumsan. Proin imperdiet, dui vel commodo varius, sem libero auctor dolor, eu tincidunt est massa non eros. Ut viverra efficitur urna, id laoreet ex commodo vitae. Nulla id felis id urna aliquet eleifend ut eu nibh.","start":"2020-05-28 15:00:00","end":"2020-05-28 15:21:00","idpat":"1","idprat":"1"},
+{"id":"41","description":"toujours ce code...","start":"2020-05-26 09:20:00","end":"2020-05-26 09:40:00","idpat":"1","idprat":"1"},
+{"id":"42","description":"code code codet","start":"2020-05-26 12:18:00","end":"2020-05-26 12:38:00","idpat":"1","idprat":"1"},
+{"id":"81","description":"dfgw","start":"2020-06-24 09:00:00","end":"2020-06-24 09:20:00","idpat":"1","idprat":"1"},
+{"id":"49","description":"codicoda","start":"2020-05-26 09:40:00","end":"2020-05-27 10:00:00","idpat":"2","idprat":"1"},
+{"id":"87","description":"xnwdh","start":"2020-05-29 09:53:00","end":"2020-05-28 10:13:00","idpat":"1","idprat":"1"}
+]
+}
+,{"type":"table","name":"externe","database":"tutocalendar","data":
+[
+
+]
+}
+,{"type":"table","name":"ligne_ordo","database":"tutocalendar","data":
+[
+{"id":"1","id_ordo":"1","id_medicament":"1","posologie":"1, 2 fois par jour"},
+{"id":"2","id_ordo":"1","id_medicament":"2","posologie":"matin et soir"},
+{"id":"3","id_ordo":"2","id_medicament":"1","posologie":"midi"},
+{"id":"4","id_ordo":"2","id_medicament":"2","posologie":"5 par jours jusqu’à 10 jours "}
+]
+}
+,{"type":"table","name":"medicament","database":"tutocalendar","data":
+[
+{"id_medicament":"1","nom":"Dafalgan","fabricant":"UPSA","molecule":"paracetamol"},
+{"id_medicament":"2","nom":"Aspegic","fabricant":"Sanofi","molecule":"aspirine"}
+]
+}
+,{"type":"table","name":"ordo","database":"tutocalendar","data":
+[
+{"id":"1","date":"2020-06-02","ligne":"2","idprat":"1","idpat":"1"},
+{"id":"2","date":"2020-06-10","ligne":"2","idprat":"1","idpat":"2"}
+]
+}
+,{"type":"table","name":"patient","database":"tutocalendar","data":
+[
+{"id":"1","nom":"bolot","prenom":"charlie","numtel":"06.64.61.55.69","adresse":"49 rue emilien maillard","ville":"Ancenis","cp":"44150","mail":"bolot.charlie@gmail.com","mdp":"moi","idprat":"1"},
+{"id":"2","nom":"Masseline","prenom":"Sandrine","numtel":"06.64.61.55.63","adresse":"49 rue emilien maillard","ville":"Ancenis","cp":"44150","mail":"masseline.sandrine@gmail.com","mdp":"moi","idprat":"1"},
+{"id":"3","nom":"Bolot","prenom":"Patrick","numtel":"06.64.61.55.62","adresse":"La touchardière","ville":"Jarzé","cp":"49140","mail":"patrick.bolot@gmail.com","mdp":"moi","idprat":"1"},
+{"id":"22","nom":"dupont","prenom":"benjamin","numtel":"02.15.63.29.42","adresse":"4 parc Lavolière","ville":"Le Havre","cp":"76600","mail":"bd@laposte.net","mdp":"moi","idprat":"1"},
+{"id":"20","nom":"Dupuis","prenom":"Paul","numtel":"02.35.63.42.59","adresse":"3 rue verte","ville":"Rouen","cp":"76000","mail":"Pauldupuis@laposet.net","mdp":"moi","idprat":"1"},
+{"id":"21","nom":"Masseline","prenom":"delphine","numtel":"06.63.25.36.63","adresse":"32 rue des roses","ville":"Rouen","cp":"76000","mail":"del.mass@gmail.com","mdp":"moi","idprat":"1"},
+{"id":"11","nom":"dupont","prenom":"delphine","numtel":"06.54.63.95.86","adresse":"44 impasse jean jaures","ville":"St Cyr sur Loire","cp":"39150","mail":"phinoupioupiou@gmail.com","mdp":"moi","idprat":"1"},
+{"id":"24","nom":"dedain","prenom":"pierrick","numtel":"06.63.25.56.32","adresse":"32 avenue du marechal Foch","ville":"Le Havre","cp":"76600","mail":"pier.ded@gmail.com","mdp":"moi","idprat":"1"},
+{"id":"26","nom":"Doe","prenom":"John","numtel":"01.23.45.67.89","adresse":"1 avenue du clair-obscur","ville":"Ailleurs","cp":"12345","mail":"anonyme@qqc.com","mdp":"moi","idprat":"1"}
+]
+}
+,{"type":"table","name":"praticien","database":"tutocalendar","data":
+[
+{"id":"1","nom":"bonno","prenom":"jean","mdp":"moi","mail":"jeanbono@gmail.com"},
+{"id":"2","nom":"truc","prenom":"machin","mdp":"moi","mail":"trucmachin@mail.com"}
+]
+}
+]
