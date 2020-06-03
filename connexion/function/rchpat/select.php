@@ -32,9 +32,11 @@ $pdo= get_pdo();
                     $ville = $data[$i]['ville'];
                     $cp = $data[$i]['cp'];
                     $numtel = $data[$i]['numtel'];
+                    $idpat = $data[$i]['id'];
                     $message[$i] = $prenom.' '.$nom.' résidant '.$adresse.' '.$ville.' '.$cp.' Tel : '.$numtel.' @Mail : '.'<a href="mailto:?to='.$mail.'">'.$mail.'</a>'.' '.'<a href="/phpMed/connexion/praticien/profil/fiche?id='.$i.'" class="btn btn-outline-dark btn-sm">Fiche patient</a>';
-                    $fiche[$i] = [$mail, $nom, $prenom ,$adresse ,$ville , $cp ,$numtel];
+                    $fiche[$i] = [$mail, $nom, $prenom ,$adresse ,$ville ,$cp ,$numtel ,$idpat];
                     $_SESSION['fiche'][$i]=$fiche[$i];
+                    
                     
                 }
                 //header('Location:  /phpMed/connexion/praticien/profil'); 

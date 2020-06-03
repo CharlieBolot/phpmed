@@ -3,9 +3,20 @@ require_once 'inc/header.php';
 require_once 'connexion/bdd/bdd.php';
 require_once 'connexion/src/medecin.php';
 require_once 'connexion/src/medecinDAO.php';
+require_once 'connexion/src/ordo.php';
+require_once 'connexion/src/ordoDAO.php';
+require_once 'connexion/src/ligne_ordo.php';
+require_once 'connexion/src/ligne_ordoDAO.php';
+require_once 'connexion/src/medicament.php';
+require_once 'connexion/src/medicamentDAO.php';
+require_once 'connexion/function/function.php';
 //require 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'connexion.php';
 $pdo= get_pdo();
 $medecinDAO = new medecinDAO($pdo);
+$ordoDAO = new OrdoDAO($pdo);
+$ligneordoDAO = new Ligne_ordoDAO($pdo);
+$medicamentDAO = new medicamentDAO($pdo);
+$liste_ordo = $ordoDAO->getList();
 $i = $_GET["id"];
 
 ?>
@@ -61,18 +72,52 @@ $i = $_GET["id"];
                     <button class="btn btn-primary" >Consulter les rendez-vous</button>
                 </div>
             </div>
-        </form>   
+        </form> 
+        
+        <form action='/phpMed/connexion/praticien/profil/ordo'> 
+            <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
+                <div class="form-group">
+                    <button class="btn btn-primary" >Ajouter une ordonnance</button>
+                </div>
+            </div>
+        </form> 
             
     
 </div>
 
 <div class="col-sm-6"> 
 
-    <iframe src="connexion\views\ordo\ordo.php" 
-        width="1000" 
-        height="800" 
-        style="border:2px solid">
-    </iframe> 
+    
+
+     <!-- </?php var_dump($liste_ordo)?>  -->
+     <h2>Liste d'ordonnance : </h2>
+     
+         
+     <?php 
+        $h=1;
+        foreach($liste_ordo as $ordos):?>
+        
+        <?php $ligneordos = $ordos->getDate();?> 
+        <button class="btn btn-secondary" onclick="visibilite('ordo<?=$h?>')">Ordonnance du : <?php  print_r($ligneordos); ?></button><br>
+        <div id="ordo<?=$h?>" style='display:none' >
+            <b>Prescription : </b><br>
+            <?php $ligneordo = $ligneordoDAO->getListOrdo($ordos->getId());?>
+            <?php foreach($ligneordo as $ligne):?>
+                <?php  $nomedoc = $medicamentDAO->getMedoc($ligne->getId_medicament()); ?>
+
+                <?php print_r($nomedoc[0]['nom']); ?> :
+                <?php print_r($ligne->getPosologie()); ?><br>
+            <?php endforeach;?> 
+            <br>
+        </div>
+
+        
+     <?php 
+        $h++;
+    endforeach;?> 
+            
+        
+
 </div>
 
 

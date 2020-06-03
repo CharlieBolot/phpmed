@@ -27,12 +27,12 @@ $prenom = $rech[1];
             $ville = $data['ville'];
             $cp = $data['cp'];
             $numtel = $data['numtel'];
-           
+            $idpat = $data['id'];
            
             $message[0]=$prenom.' '.$nom.' résidant '.$adresse.' '.$ville.' '.$cp.' Tel : '.$numtel.' @Mail : '.'<a href="mailto:?to='.$mail.'">'.$mail.'</a>'.' '.'<a href="/phpMed/connexion/praticien/profil/fiche?id=0" class="btn btn-outline-dark btn-sm">Fiche patient</a>';
             //$fiche = [$data];
-            $fiche[0] = [$mail, $nom, $prenom ,$adresse ,$ville , $cp ,$numtel];
-                    
+            $fiche[0] = [$mail, $nom, $prenom ,$adresse ,$ville , $cp ,$numtel, $idpat];
+            $_SESSION['fiche'][0]=$fiche[0];
             //header('Location:  /phpMed/connexion/praticien/profil');
            
         
@@ -45,7 +45,7 @@ $prenom = $rech[1];
 
         $_SESSION['message']=$message;
         //$_SESSION['fiche']=$fiche;
-        $_SESSION['fiche'][0]=$fiche[0];
+        
         header('Location:  /phpMed/connexion/praticien/profil');
  
     

@@ -1,5 +1,5 @@
 <?php
-class Ligne_ordonanceDAO{
+class ligne_ordoDAO{
     private $pdo;
 
     public function __construct($pdo){
@@ -15,7 +15,7 @@ class Ligne_ordonanceDAO{
      */
     public function getListOrdo($id): array{
         
-        $listeordo = [];
+        $listligne = [];
 
 
         $ordo = $this->pdo->prepare('SELECT * FROM ligne_ordo WHERE id_ordo = :id');
@@ -24,10 +24,12 @@ class Ligne_ordonanceDAO{
 
         $data=$ordo->fetchAll();
          foreach($data as $value){
-             $listeordo[]=new Ordo($value);
+             $listligne[]=new ligne_ordo($value);
              
         }
-        return $listeordo;
+        return $listligne;
     }
+
+    
 }
 

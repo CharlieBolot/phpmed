@@ -82,6 +82,12 @@
           elseif(($page[5]) === 'fiche'){
             require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'fichepat.php';
           }
+          elseif(($page[5]) === 'ordo'){
+            require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'redacordo.php';
+          }
+          elseif(($page[5]) === 'redacordo'){
+            require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'ordo'.DIRECTORY_SEPARATOR.'ordonnance.php';
+          }
       }
       elseif($page[4] === 'wrong'){
         require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'pratcon.php';

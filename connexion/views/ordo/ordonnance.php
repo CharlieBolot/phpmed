@@ -1,13 +1,14 @@
 <?php
+session_start(); 
 //require 'connexion/fpdf/fpdf.php';
-require('E:\Progaramme\WAMP\www\phpmed\connexion\fpdf\fpdf.php');
+require('connexion\fpdf\fpdf.php');
 
 // Création de la class PDF 
 class PDF extends FPDF { 
     // Header 
     function Header() { 
       // Logo : 100 >position à droite du document (en mm), 2 >position en haut du document, 40 >largeur de l'image en mm). La hauteur est calculée automatiquement. 
-      $this->Image('logo.png',100,2,40); 
+      $this->Image('connexion\views\ordo\logo.png',100,2,40); 
       // Saut de ligne 20 mm 
       $this->Ln(20); 
    
@@ -19,7 +20,7 @@ class PDF extends FPDF {
       $this->SetX(35); 
       $this->SetY(15); 
       // Texte : 100 >largeur ligne, 10 >hauteur ligne. Premier 0 >pas de bordure, 1 >retour à la ligneensuite, C >centrer texte, 1> couleur de fond ok   
-      $this->Cell(100,5,'Dr Bono Jean',0,1,'L',0); 
+      $this->Cell(100,5,'Dr '.$_SESSION['prenom'].' '.$_SESSION['nom'],0,1,'L',0); 
 
       // Titre gras (B) police Helbetica de 10
       $this->SetFont('Helvetica','I',10); 
@@ -39,7 +40,7 @@ class PDF extends FPDF {
       // Numéro de page, centré (C) 
       $this->Cell(0,5,'Page '.$this->PageNo().'/{nb}',0,0,'C'); 
 
-      $this->Image('signature.png',100,175,20,10); 
+      $this->Image('connexion\views\ordo\signature.png',100,175,20,10); 
     } 
   }
 
@@ -55,14 +56,14 @@ $pdf->SetFont('Helvetica','',9);
 $pdf->SetTextColor(0); 
 // Compteur de pages {nb} 
 $pdf->AliasNbPages();
-$pdf->Image('barcode.png',15,35,30,10);
+$pdf->Image('connexion\views\ordo\barcode.png',15,35,30,10);
 // Sous-titre calées à gauche, texte gras (Bold), police de caractère 11 
 $pdf->SetFont('Helvetica','B',11); 
 // couleur de fond de la cellule : gris clair 
 $pdf->setFillColor(230,230,230); 
 // Cellule avec les données du sous-titre sur 2 lignes, pas de bordure mais couleur de fond grise 
-$pdf->Cell(75,6,strtoupper(utf8_decode('Pour'.' : '.'paul'.' '.'durand')),0,1,'L',1);         
-$pdf->Cell(75,6,'Le '.'04/09/19',0,1,'L',1);     
+$pdf->Cell(75,6,strtoupper(utf8_decode('Pour'.' : '.$_SESSION['fiche'][0][2].' '.$_SESSION['fiche'][0][1])),0,1,'L',1);         
+$pdf->Cell(75,6,'Le '.date('d/m/Y'),0,1,'L',1);     
 $pdf->Ln(10); // saut de ligne 10mm
 // Fonction en-tête des tableaux en 3 colonnes de largeurs variables 
 function entete_table($position_entete) { 
@@ -99,4 +100,4 @@ function entete_table($position_entete) {
 
 
 // affichage à l'écran... 
-$pdf->Output('test.pdf','I');
+$pdf->Output('ordonnance'.$_SESSION['fiche'][0][2].$_SESSION['fiche'][0][1].'pdf','I');
