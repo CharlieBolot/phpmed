@@ -10,4 +10,7 @@ function visibilite(thingId) {
     }
 }
 
+
+
+
 </script>

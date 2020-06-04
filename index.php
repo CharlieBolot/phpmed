@@ -88,6 +88,9 @@
           elseif(($page[5]) === 'redacordo'){
             require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'ordo'.DIRECTORY_SEPARATOR.'ordonnance.php';
           }
+          elseif(($page[5]) === 'newordo'){
+            require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'ajoutmedoc.php';
+          }
       }
       elseif($page[4] === 'wrong'){
         require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'praticien'.DIRECTORY_SEPARATOR.'pratcon.php';

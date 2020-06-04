@@ -1,7 +1,15 @@
 <?php
 session_start(); 
+ if(empty($_SESSION['idmedoc'])){
+  $_SESSION['idmedoc'] = 0;
+};
+if(empty($_SESSION['id_ordo'])){
+  $_SESSION['id_ordo'] = 0;
+}; 
+ 
 //require 'connexion/fpdf/fpdf.php';
 require('connexion\fpdf\fpdf.php');
+
 
 // Création de la class PDF 
 class PDF extends FPDF { 
@@ -74,14 +82,52 @@ function entete_table($position_entete) {
     $pdf->SetY($position_entete); 
     // position de colonne 1 (10mm à gauche)   
     $pdf->SetX(10); 
-    $pdf->Cell(40,8,utf8_decode('Médicament'),0,0,'L',0);  // 40 >largeur colonne, 8 >hauteur colonne 
+    $pdf->Cell(40,8,utf8_decode(nommedoc($_SESSION['idmedoc'], $_SESSION['id_ordo'])),0,0,'L',0);  // 40 >largeur colonne, 8 >hauteur colonne 
     // position de la colonne 2 (50 = 10+40) 
     $pdf->SetX(50);  
-    $pdf->Cell(90,8,'Posologie',0,0,'L',0); 
-
-   
+    $pdf->Cell(90,8,utf8_decode(posologie($_SESSION['id_ordo'])),0,0,'L',0); 
+  
     $pdf->Ln(); // Retour à la ligne 
-  } 
+  }
+  
+  function nommedoc($idmedoc,$id_ordo){
+    require_once 'connexion/bdd/bdd.php';
+    $pdo= get_pdo();
+    $req = $pdo->prepare('SELECT nom FROM medicament,ordo,ligne_ordo WHERE ligne_ordo.id_medicament = :id_medicament AND ligne_ordo.id_ordo = ordo.id AND ligne_ordo.id_ordo = :id_ordo '); 
+    $req->bindParam(':id_medicament',$idmedoc, PDO::PARAM_STR);
+    $req->bindParam(':id_ordo',$id_ordo, PDO::PARAM_STR);
+    $req->execute( );
+    $data = $req->fetch();
+    //var_dump($data);
+    return $data['nom'];
+
+  }
+
+  function posologie($id_ordo){
+    require_once 'connexion/bdd/bdd.php';
+    $pdo= get_pdo();
+    $req = $pdo->prepare('SELECT posologie FROM ordo,ligne_ordo WHERE ligne_ordo.id_ordo = ordo.id AND ligne_ordo.id_ordo = :id_ordo ');
+    $req->bindParam(':id_ordo',$id_ordo, PDO::PARAM_STR);
+    $req->execute( );
+    $data = $req->fetch();
+    //var_dump($data);
+    return $data['posologie'];
+
+  }
+
+  function nbligne($id_ordo){
+    require_once 'connexion/bdd/bdd.php';
+    $pdo= get_pdo();
+    $req = $pdo->prepare('SELECT COUNT(id_ordo) FROM ligne_ordo,ordo WHERE ligne_ordo.id_ordo = ordo.id AND ligne_ordo.id_ordo = :id_ordo ');
+    $req->bindParam(':id_ordo',$id_ordo, PDO::PARAM_STR);
+    $req->execute( );
+    $data = $req->fetch();
+   
+    return $data['COUNT(id_ordo)'];
+  }
+  
+ 
+  
   // AFFICHAGE EN-TÊTE DU TABLEAU 
   // Position ordonnée de l'entête en valeur absolue par rapport au sommet de la page (70 mm) 
   $position_entete = 70; 
@@ -89,9 +135,12 @@ function entete_table($position_entete) {
   $pdf->SetFont('Helvetica','',9); 
   $pdf->SetTextColor(0); 
   // on affiche les en-têtes du tableau 
+  for($i=0; $i<nbligne($_SESSION['id_ordo']); $i++){
   entete_table($position_entete);
   $position_entete += 5;
-  entete_table($position_entete);
+  }
+  
+ 
 
   $position_detail = 78; // Position ordonnée = $position_entete+hauteur de la cellule d'en-tête (60+8) 
 
