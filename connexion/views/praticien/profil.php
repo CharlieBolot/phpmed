@@ -4,6 +4,7 @@ require_once 'connexion/bdd/bdd.php';
 require_once 'connexion/src/patient.php';
 require_once 'connexion/src/patientDAO.php';
 require_once 'connexion/function/nextrdv.php';
+require_once 'connexion/function/function.php';
 $pdo= get_pdo();
 $patientDAO = new patientDAO($pdo);
 $listePatient = $patientDAO->getlist();
@@ -11,26 +12,15 @@ $listePatient = $patientDAO->getlist();
 
 ?> 
 
- <h2 class="text-center">Bienvenu docteur <?= $_SESSION['prenom'].' '.$_SESSION['nom'] ?></h2>
+ <h2 class="text-center">Bienvenu Dr. <?= $_SESSION['prenom'].' '.$_SESSION['nom'] ?></h2>
 <div class="row d-flex flex-row justify-content-center">  
     
 
     <div class="col-xl-3 col-lg-5 mr-4">
-        
-          <div class="col-sm-12">
-                <div class="form-group">
-                       
-                        <h3> Que voulez-vous faire ?<h3>
-                            <div class='btn-group-vertical btn-group-sm mb-3 ' role="group" aria-label="optionprat">                                    
-                                <form action ='/phpMed/connexion/praticien/calendrier'> <button type="submit" class="btn btn-primary text-left" >Consulter vos rendez-vous</button>     </form>                           
-                                <button type="button" class="btn btn-primary text-left" >Consulter la liste des patients</button>
-                                <button type="button" class="btn btn-primary text-left" >Consulter vos emails</button>   
-                            </div>
-                </div>
-
+            <div class="form-group">
+                        <h2>&nbsp</h2>
             </div>
-
-            <div class="col-sm-12" >
+            <div id="patient" class="col-sm-12" >
                 <h4>Liste des patients</h4>
                 <form action='/phpMed/connexion/praticien/recherchepatient/rch' label='recherchepatient' method='post'>
                     <input id="recherche" type="text" required class="form-control" name="nom" placeholder="nom ou prénom">
@@ -40,7 +30,9 @@ $listePatient = $patientDAO->getlist();
                         <?php $taille = count($_SESSION['message']); 
                         for($i=0;$i<$taille;$i++):?>
                             <div class="container">
-                                <?php print_r($_SESSION['message'][$i]);?>
+                                <?php echo'<pre>';
+                                print_r($_SESSION['message'][$i]);
+                                echo'</pre>' ?>
                             </div>
                         <?php endfor;?>
                     
@@ -98,6 +90,7 @@ $listePatient = $patientDAO->getlist();
                             <h5> Aucun rendez-vous restant aujourd'hui !</h5>       
                      </div>
                 <?php endif; ?>
+                <form action ='/phpMed/connexion/praticien/calendrier'> <button type="submit" class="btn btn-primary text-left" >Consulter vos rendez-vous</button> 
 
             </fieldset>
 

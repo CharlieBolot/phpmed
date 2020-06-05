@@ -28,10 +28,10 @@ $i = $_GET["id"];
 
     
 
-    <div class="col-sm-6"> 
+    <div class="col-sm-4 offset-sm-2"> 
         <div class="col-sm-12">
             <div class="form-group">
-                    <h2><?= $_SESSION['fiche'][$i][1].' '.$_SESSION['fiche'][$i][2] ?></h2>
+                    <h2>Patient : <?= $_SESSION['fiche'][$i][1].' '.$_SESSION['fiche'][$i][2] ?></h2>
                 </div>
             </div>
 
@@ -65,27 +65,26 @@ $i = $_GET["id"];
             </ul>
         </form>    
       
-        
-        <form action='/phpMed/connexion/patient/calendrier'> <!-- TODO modiifier pour aficher la liste des rdv du patient ? -->
-            <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
-                <div class="form-group">
-                    <button class="btn btn-primary" >Consulter les rendez-vous</button>
+        <div class='row col-sm-11 offset-sm-1'>
+            <form action='/phpMed/connexion/patient/calendrier'> <!-- TODO modiifier pour aficher la liste des rdv du patient ? -->
+                <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
+                    <div class="form-group">
+                        <button class="btn btn-primary" >Consulter les rendez-vous</button>
+                    </div>
                 </div>
-            </div>
-        </form> 
-        
-        <form action='/phpMed/connexion/praticien/profil/ordo'> 
-            <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
-                <div class="form-group">
-                    <button class="btn btn-primary" >Ajouter une ordonnance</button>
-                </div>
-            </div>
-        </form> 
-            
-    
-</div>
+            </form> 
 
-<div class="col-sm-6"> 
+            <form action='/phpMed/connexion/praticien/profil/ordo'> 
+                <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
+                    <div class="form-group">
+                        <button class="btn btn-primary" >Ajouter une ordonnance</button>
+                    </div>
+                </div>
+            </form> 
+        </div>
+    </div>
+
+<div class="col-sm-4"> 
 
     
 

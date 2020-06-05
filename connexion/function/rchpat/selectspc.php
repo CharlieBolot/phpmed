@@ -29,7 +29,7 @@ $prenom = $rech[1];
             $numtel = $data['numtel'];
             $idpat = $data['id'];
            
-            $message[0]=$prenom.' '.$nom.' résidant '.$adresse.' '.$ville.' '.$cp.' Tel : '.$numtel.' @Mail : '.'<a href="mailto:?to='.$mail.'">'.$mail.'</a>'.' '.'<a href="/phpMed/connexion/praticien/profil/fiche?id=0" class="btn btn-outline-dark btn-sm">Fiche patient</a>';
+            $message[0]=$prenom.' '.$nom.'<br>résidant '.$adresse.' '.$ville.' '.$cp.'<br>Tel : '.$numtel.'<br>@Mail : '.'<a href="mailto:?to='.$mail.'">'.$mail.'</a>'.' '.'<br><a href="/phpMed/connexion/praticien/profil/fiche?id=0" class="btn btn-outline-dark btn-sm">Fiche patient</a>';
             //$fiche = [$data];
             $fiche[0] = [$mail, $nom, $prenom ,$adresse ,$ville , $cp ,$numtel, $idpat];
             $_SESSION['fiche'][0]=$fiche[0];

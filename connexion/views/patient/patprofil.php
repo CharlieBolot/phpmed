@@ -38,10 +38,10 @@ $medecin = $medecinDAO->getmedecin($id);
 
     
 
-    <div class="col-sm-6"> 
+    <div class="col-sm-6 offset-sm-3"> 
         <div class="col-sm-12">
             <div class="form-group">
-                    <h2><?= $_SESSION['nom'].' '.$_SESSION['prenom'] ?></h2>
+                    <h2><?= $_SESSION['nom'].' '.$_SESSION['prenom'] ?> - mon profil :</h2>
                 </div>
             </div>
 
@@ -81,25 +81,26 @@ $medecin = $medecinDAO->getmedecin($id);
                 </li>
             </ul>
 
+        <div class="d-inline-flex ml-md-4">
 
-            <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
-                <div class="form-group">
-                    <button class="btn btn-primary" >Valider les modifications</button>
+                <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
+                    <div class="form-group">
+                        <button class="btn btn-primary" >Valider les modifications</button>
+                    </div>
                 </div>
-            </div>
-        </form>    
-      
-        
-        <form action='/phpMed/connexion/patient/calendrier'>
-            <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
-                <div class="form-group">
-                    <button class="btn btn-primary" >Consulter les rendez-vous</button>
+            </form>    
+                    
+                    
+            <form action='/phpMed/connexion/patient/calendrier'>
+                <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
+                    <div class="form-group">
+                        <button class="btn btn-primary" >Prendre rendez-vous</button>
+                    </div>
                 </div>
-            </div>
-        </form>   
-            
-    
-</div>
+            </form>   
+                    </div>           
+                    
+        </div>
 
 
 <?php

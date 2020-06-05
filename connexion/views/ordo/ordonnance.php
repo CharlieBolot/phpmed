@@ -74,44 +74,32 @@ $pdf->Cell(75,6,strtoupper(utf8_decode('Pour'.' : '.$_SESSION['fiche'][0][2].' '
 $pdf->Cell(75,6,'Le '.date('d/m/Y'),0,1,'L',1);     
 $pdf->Ln(10); // saut de ligne 10mm
 // Fonction en-tête des tableaux en 3 colonnes de largeurs variables 
-function entete_table($position_entete) { 
+function entete_table($position_entete,$i) { 
     global $pdf; 
     $pdf->SetDrawColor(183); // Couleur du fond RVB 
     $pdf->SetFillColor(221); // Couleur des filets RVB 
     $pdf->SetTextColor(0); // Couleur du texte noir 
     $pdf->SetY($position_entete); 
     // position de colonne 1 (10mm à gauche)   
-    $pdf->SetX(10); 
-    $pdf->Cell(40,8,utf8_decode(nommedoc($_SESSION['idmedoc'], $_SESSION['id_ordo'])),0,0,'L',0);  // 40 >largeur colonne, 8 >hauteur colonne 
+    $pdf->SetX(10);
+    $pdf->Cell(40,8,utf8_decode(medicament($_SESSION['id_ordo'])[$i]['nom']),0,0,'L',0);  // 40 >largeur colonne, 8 >hauteur colonne 
     // position de la colonne 2 (50 = 10+40) 
     $pdf->SetX(50);  
-    $pdf->Cell(90,8,utf8_decode(posologie($_SESSION['id_ordo'])),0,0,'L',0); 
+    $pdf->Cell(90,8,utf8_decode(medicament($_SESSION['id_ordo'])[$i]['posologie']),0,0,'L',0); 
   
     $pdf->Ln(); // Retour à la ligne 
   }
-  
-  function nommedoc($idmedoc,$id_ordo){
+
+
+  function medicament($id_ordo){
     require_once 'connexion/bdd/bdd.php';
     $pdo= get_pdo();
-    $req = $pdo->prepare('SELECT nom FROM medicament,ordo,ligne_ordo WHERE ligne_ordo.id_medicament = :id_medicament AND ligne_ordo.id_ordo = ordo.id AND ligne_ordo.id_ordo = :id_ordo '); 
-    $req->bindParam(':id_medicament',$idmedoc, PDO::PARAM_STR);
+    $req = $pdo->prepare('SELECT posologie,ligne_ordo.id_medicament,nom FROM ligne_ordo,medicament WHERE ligne_ordo.id_ordo = :id_ordo AND ligne_ordo.id_medicament = medicament.id_medicament ORDER BY nom ASC ');
     $req->bindParam(':id_ordo',$id_ordo, PDO::PARAM_STR);
     $req->execute( );
-    $data = $req->fetch();
+    $data = $req->fetchAll();
     //var_dump($data);
-    return $data['nom'];
-
-  }
-
-  function posologie($id_ordo){
-    require_once 'connexion/bdd/bdd.php';
-    $pdo= get_pdo();
-    $req = $pdo->prepare('SELECT posologie FROM ordo,ligne_ordo WHERE ligne_ordo.id_ordo = ordo.id AND ligne_ordo.id_ordo = :id_ordo ');
-    $req->bindParam(':id_ordo',$id_ordo, PDO::PARAM_STR);
-    $req->execute( );
-    $data = $req->fetch();
-    //var_dump($data);
-    return $data['posologie'];
+    return $data;
 
   }
 
@@ -136,7 +124,7 @@ function entete_table($position_entete) {
   $pdf->SetTextColor(0); 
   // on affiche les en-têtes du tableau 
   for($i=0; $i<nbligne($_SESSION['id_ordo']); $i++){
-  entete_table($position_entete);
+  entete_table($position_entete,$i);
   $position_entete += 5;
   }
   
