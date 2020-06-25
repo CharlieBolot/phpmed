@@ -36,6 +36,12 @@
           }
         }
       }
+      elseif(($page[4]) === 'info'){
+        require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'infopat.php';
+      }
+      elseif(($page[4]) === 'delinfo'){
+        require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'delinfopat.php';
+      }
       elseif($page[4] === 'dmdrdv'){
         if(empty($page[5])){
           require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'patient'.DIRECTORY_SEPARATOR.'dmdrdv.php';

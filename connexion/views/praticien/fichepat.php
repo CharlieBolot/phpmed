@@ -4,11 +4,13 @@ require_once 'connexion/bdd/bdd.php';
 require_once 'connexion/src/medecin.php';
 require_once 'connexion/src/medecinDAO.php';
 require_once 'connexion/src/ordo.php';
+require_once 'connexion/src/infopat.php';
 require_once 'connexion/src/ordoDAO.php';
 require_once 'connexion/src/ligne_ordo.php';
 require_once 'connexion/src/ligne_ordoDAO.php';
 require_once 'connexion/src/medicament.php';
 require_once 'connexion/src/medicamentDAO.php';
+require_once 'connexion/src/infopatDAO.php';
 require_once 'connexion/function/function.php';
 //require 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'connexion.php';
 $pdo= get_pdo();
@@ -16,7 +18,9 @@ $medecinDAO = new medecinDAO($pdo);
 $ordoDAO = new OrdoDAO($pdo);
 $ligneordoDAO = new Ligne_ordoDAO($pdo);
 $medicamentDAO = new medicamentDAO($pdo);
+$infopatDAO = new info_patientDAO($pdo);
 $liste_ordo = $ordoDAO->getList();
+$liste_info = $infopatDAO->getListInfo();
 $i = $_GET["id"];
 
 ?>
@@ -24,11 +28,11 @@ $i = $_GET["id"];
 
 <div class="row ">  
 
-    <!--</?php var_dump($_SESSION['fiche'][0][1]) ?>--->
+    <!--</?php var_dump($_SESSION['fiche'][0][7]) ?>--->
 
     
 
-    <div class="col-sm-4 offset-sm-2"> 
+    <div class="col-sm-3 offset-sm-1"> 
         <div class="col-sm-12">
             <div class="form-group">
                     <h2>Patient : <?= $_SESSION['fiche'][$i][1].' '.$_SESSION['fiche'][$i][2] ?></h2>
@@ -65,7 +69,7 @@ $i = $_GET["id"];
             </ul>
         </form>    
       
-        <div class='row col-sm-11 offset-sm-1'>
+        <div class='row'>
             <form action='/phpMed/connexion/patient/calendrier'> <!-- TODO modiifier pour aficher la liste des rdv du patient ? -->
                 <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
                     <div class="form-group">
@@ -84,39 +88,61 @@ $i = $_GET["id"];
         </div>
     </div>
 
-<div class="col-sm-4"> 
+    <div class="col-sm-2 "> 
 
-    
+         <!-- </?php var_dump($liste_ordo)?>  -->
+         <h2>Liste d'ordonnance : </h2>
 
-     <!-- </?php var_dump($liste_ordo)?>  -->
-     <h2>Liste d'ordonnance : </h2>
-     
-         
-     <?php 
+
+        <?php 
         $h=1;
         foreach($liste_ordo as $ordos):?>
-        
-        <?php $ligneordos = $ordos->getDate();?> 
-        <button class="btn btn-secondary" onclick="visibilite('ordo<?=$h?>')">Ordonnance du : <?php  print_r($ligneordos); ?></button><br>
-        <div id="ordo<?=$h?>" style='display:none' >
-            <b>Prescription : </b><br>
-            <?php $ligneordo = $ligneordoDAO->getListOrdo($ordos->getId());?>
-            <?php foreach($ligneordo as $ligne):?>
-                <?php  $nomedoc = $medicamentDAO->getMedoc($ligne->getId_medicament()); ?>
 
-                <?php print_r($nomedoc[0]['nom']); ?> :
-                <?php print_r($ligne->getPosologie()); ?><br>
-            <?php endforeach;?> 
-            <br>
-        </div>
+            <?php $ligneordos = $ordos->getDate();?> 
+            <button class="btn btn-secondary" onclick="visibilite('ordo<?=$h?>')">Ordonnance du : <?php  print_r($ligneordos); ?></button><br>
+            <div id="ordo<?=$h?>" style='display:none' >
+                <b>Prescription : </b><br>
+                <?php $ligneordo = $ligneordoDAO->getListOrdo($ordos->getId());?>
+                <?php foreach($ligneordo as $ligne):?>
+                    <?php  $nomedoc = $medicamentDAO->getMedoc($ligne->getId_medicament()); ?>
+
+                    <?php print_r($nomedoc[0]['nom']); ?> :
+                    <?php print_r($ligne->getPosologie()); ?><br>
+                <?php endforeach;?> 
+                <br>
+            </div>
+
+                
+         <?php 
+            $h++;
+        endforeach;?> 
+    </div>
+    <div class="col-sm-4 offset-sm-1"> 
 
         
-     <?php 
-        $h++;
-    endforeach;?> 
+
+         <!-- </?php var_dump($_SESSION['fiche'][0][7])?>  -->
+         <h2>Bloc note :</h2>
+         <form method="post" class="form-group" action="/phpMed/connexion/patient/info">
+            <textarea id="info" type="text" class="form-control" name="info"></textarea>
+            <input id="id_pat" type="hidden" class="form-control" name="id_pat" value='<?= $_SESSION['fiche'][0][7]?>'>
+            <button class="btn btn-primary" >Ajouter</button>
+         </form>
+
+        <?php foreach($liste_info as $info):?>
             
+            <div class="row">
+            <a href="/phpMed/connexion/patient/delinfo?id=<?= $info->getId()?>"> &#10060</a>
+                <div class="ml-1"> <?= $info->getInfo()?></div>
+        </div>
+        <?php endforeach;?>
+
+
+
         
 
+
+    </div>
 </div>
 
 

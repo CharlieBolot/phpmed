@@ -26,7 +26,7 @@ if(!empty($_POST)){
     $req->execute( );
     $data = $req->fetch();
 
-    header('Location: /phpMed/connexion/patient/profil/modif/update');
+    header('Location: /phpMed/connexion/patient/profil/fiche/');
     
     exit();
 
