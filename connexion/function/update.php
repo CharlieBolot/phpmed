@@ -17,16 +17,18 @@ if(!empty($_POST)){
     $idprat = $_POST['idprat'];
 
 
-
-
-    
-
     $req = $pdo->prepare('UPDATE patient SET nom="'.$nom.'",prenom="'.$prenom.'",numtel="'.$numtel.'",adresse="'.$adresse.'",ville="'.$ville.'",cp="'.$cp.'",mail="'.$mail.'",mdp="'.$mdp.'",idprat="'.$idprat.'" WHERE id=:id');
     $req->bindValue('id',$id,PDO::PARAM_INT);
     $req->execute( );
     $data = $req->fetch();
 
-    header('Location: /phpMed/connexion/patient/profil/fiche/');
+
+    foreach($_POST as $key=>$value){
+        $_SESSION[$key]=$value;
+    }
+
+
+    header('Location: /phpMed/connexion/patient/profil/');
     
     exit();
 

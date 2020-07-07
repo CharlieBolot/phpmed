@@ -145,47 +145,65 @@
       if(empty($page[4])){
         require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'admin.php';
       }
-      elseif($page[4] === 'calendrier'){
-        if(empty($page[5])){
-          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'calendrier.php';
+      elseif($page[4] === 'connec'){
+        require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'connexionadmin.php';
+      }
+      elseif($page[4] === 'addprat'){
+        require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'addprat.php';
+      }
+      elseif($page[4] === 'profil'){
+      if(empty($page[5])){
+        require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'adminacceuil.php';
         }
-        elseif($page[5] === 'add'){
-          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'add.php';
+        elseif(($page[5]) === 'fiche'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'fichepat.php';
         }
-        elseif($page[5] === 'del'){
-          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'delete.php';
+        elseif(($page[5]) === 'ordo'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'redacordo.php';
         }
-        elseif($page[5] === 'update'){
-          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'calendrier'.DIRECTORY_SEPARATOR.'update.php';
-        }          
+      }
+      elseif($page[4] === 'wrong'){
+        require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'admin.php';
+      }
+      elseif($page[4] === 'delete'){
+        require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'delete.php';
       }
       elseif($page[4] === 'recherchepatient'){
         if(empty($page[5])){
-          require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'find.php';
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'rchpatad'.DIRECTORY_SEPARATOR.'select.php';
+        }
+        elseif($page[5] === 'rch'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'rchpatad'.DIRECTORY_SEPARATOR.'select.php';
+        }
+        elseif($page[5] === 'rchspc'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'rchpatad'.DIRECTORY_SEPARATOR.'selectspc.php';
+        }
+        elseif($page[5] === 'del'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'rchpatad'.DIRECTORY_SEPARATOR.'del.php';
         }
         elseif($page[5] === 'fiche'){
           if(empty($page[6])){
-            require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'fichepatient.php';
+            require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'profil.php';
           }
-          elseif($page[6] === 'select'){
-            require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'rchpat'.DIRECTORY_SEPARATOR.'select.php';
-          }
-          elseif($page[6] === 'update'){
-            require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'rchpat'.DIRECTORY_SEPARATOR.'update.php';
-          }
-          elseif($page[6] === 'delete'){
-            require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'rchpat'.DIRECTORY_SEPARATOR.'delete.php';
-          }
-          elseif($page[6] === 'dmdrdv'){
-            if(empty($page[7])){
-              require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'dmdrdv.php';
-            }
-            elseif($page[7] === 'create'){
-              require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'create.php';
-            }         
-          }              
-        }            
-      }          
+          elseif($page[6] === 'ordonnance'){
+            require_once 'connexion'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR.'ordonnance.php';
+          }      
+        }
+      }
+      elseif($page[4] === 'rechercheprat'){
+        if(empty($page[5])){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'rchpratad'.DIRECTORY_SEPARATOR.'select.php';
+        }
+        elseif($page[5] === 'rch'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'rchpratad'.DIRECTORY_SEPARATOR.'select.php';
+        }
+        elseif($page[5] === 'rchspc'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'rchpratad'.DIRECTORY_SEPARATOR.'selectspc.php';
+        }
+        elseif($page[5] === 'del'){
+          require_once 'connexion'.DIRECTORY_SEPARATOR.'function'.DIRECTORY_SEPARATOR.'rchpratad'.DIRECTORY_SEPARATOR.'del.php';
+        }
+      }  
     }
    
   }

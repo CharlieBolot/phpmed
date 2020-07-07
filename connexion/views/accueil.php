@@ -15,8 +15,8 @@ require_once 'inc/header.php';
             <h2><a href='/phpmed/connexion/praticien' >Praticien</a></h2>
         </div>  
     </div>
-    <div class="col-sm-12 text-center"> 
-            <br><h6 class="mr-5"><a href='/phpmed/connexion/admin' >Admin</a></h6>
+     <div class="col-sm-12 text-center"> 
+            <br><h6 class="mr-5"><a href='/phpmed/connexion/admin'>Admin</a></h6>
     </div>
 </div>
   
